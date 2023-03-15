@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "477256722658",
+    "project_id": "querium-40901",
+    "storage_bucket": "querium-40901.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477256722658:android:a8865cfb72173b96e596bb",
+        "android_client_info": {
+          "package_name": "com.example.querium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477256722658-rfn2c8h88vbd3lj6n1f57aq223cdjhue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfAesMhFw_wD2mfbJAiISry1IPnl1jdd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477256722658-rfn2c8h88vbd3lj6n1f57aq223cdjhue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
