@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class AuthMethods {
   //Instance of firebase authentication
@@ -46,6 +45,17 @@ class AuthMethods {
       } else {
         res = "Enter email and password";
       }
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
+  Future<String> logoutUser() async {
+    String res = "Some Error Occured";
+    try {
+      await _auth.signOut();
+      res = "Log Out Success";
     } catch (err) {
       res = err.toString();
     }
