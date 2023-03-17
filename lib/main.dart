@@ -1,6 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:querium/activities/studentHomeScreen.dart';
+import 'package:querium/views/login_view.dart';
+import 'package:querium/views/onboarding.dart';
+import 'package:querium/views/signup_view.dart';
 import 'package:querium/views/splash_view.dart';
 
 void main() async {
@@ -16,6 +20,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Querium',
+      routes: {
+        '/onBoard': (context) => const OnBoarding(),
+        '/login': (context) => const LoginView(),
+        '/signup': (context) => const SignUpView(),
+        '/stHomeScreen': (context) => const StudentHomeScreen(),
+      },
       theme: ThemeData(
         fontFamily: GoogleFonts.poppins().fontFamily,
         scaffoldBackgroundColor: Colors.white,

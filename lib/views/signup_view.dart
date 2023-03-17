@@ -49,7 +49,7 @@ class _SignUpViewState extends State<SignUpView> {
       showSnackBar(context, res);
     } else {
       // ignore: use_build_context_synchronously
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const LoginView()),
       );

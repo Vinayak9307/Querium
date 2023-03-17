@@ -17,10 +17,15 @@ class _ProfileState extends State<Profile> {
         elevation: 0,
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        title: Center(child: const Text('Profile' ,style: TextStyle(color: Color.fromARGB(255, 147, 141, 141)),)),
+        title: const Center(
+            child: Text(
+          'Profile',
+          style: TextStyle(
+            color: Color.fromARGB(255, 147, 141, 141),
+          ),
+        )),
       ),
-      body: Body(),
+      body: const Body(),
     );
-
   }
 }

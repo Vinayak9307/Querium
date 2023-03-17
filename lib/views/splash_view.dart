@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:querium/utils/global_colors.dart';
-import 'package:querium/views/home_page_view.dart';
 import 'package:querium/views/onboarding.dart';
+
+import 'nav_bar.dart';
 
 // ignore: camel_case_types
 class splashView extends StatefulWidget {
@@ -24,7 +25,7 @@ class _splashViewState extends State<splashView> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
-            return const HomePage();
+            return const NavBar();
           } else if (snapshot.hasError) {
             return Center(
               child: Text('${snapshot.error}'),
