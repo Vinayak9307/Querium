@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:querium/models/user.dart' as model;
 
 class AuthMethods {
   //Instance of firebase authentication
@@ -17,11 +18,16 @@ class AuthMethods {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
 
-        await _firestore.collection('users').doc(cred.user!.uid).set({
-          'username': username,
-          'email': email,
-          'uid': cred.user!.uid,
-        });
+        model.User user = model.User(
+          username: username,
+          email: email,
+          uid: cred.user!.uid,
+        );
+
+        await _firestore
+            .collection('users')
+            .doc(cred.user!.uid)
+            .set(user.getData());
       }
       res = "Sign Up Success";
     } catch (err) {

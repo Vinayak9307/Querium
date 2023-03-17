@@ -18,7 +18,9 @@ class OnBoarding extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const SizedBox(height: 23,),
+              const SizedBox(
+                height: 23,
+              ),
               Container(
                 alignment: Alignment.center,
                 child: Text(
@@ -30,27 +32,38 @@ class OnBoarding extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 40,),
+              const SizedBox(
+                height: 40,
+              ),
               Image.asset(
                 "assets/images/onboard.png",
                 fit: BoxFit.cover,
               ),
-              const SizedBox(height: 80,),
+              const SizedBox(
+                height: 80,
+              ),
               InkWell(
                 onTap: () {
                   Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context) =>   const LoginView()),
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginView()),
                   );
                 },
-                child: const ButtonGlobal(text: "Student",),
+                child: const ButtonGlobal(
+                  text: "Student",
+                ),
               ),
-              const SizedBox(height: 60,),
+              const SizedBox(
+                height: 60,
+              ),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginViewAdmin()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const LoginViewAdmin()));
                 },
-                child: const ButtonGlobal(text: "Administration",),
+                child: const ButtonGlobal(
+                  text: "Administration",
+                ),
               ),
             ],
           ),
