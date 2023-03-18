@@ -1,4 +1,6 @@
 // This class is used as the user model class
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class User {
   String? uid;
   String? username;
@@ -26,12 +28,17 @@ class User {
         "hostel": hostel,
       };
 
-  User.getUser(Map<String, dynamic> map) {
-    uid = map['uid'];
-    username = map['username'];
-    email = map['email'];
-    regNo = map['regNo'];
-    roomNo = map['roomNo'];
-    hostel = map['hostel'];
+  //This method returns a user instance based on the document snapshot given by firebase authentication
+  static User getUser(DocumentSnapshot snap) {
+    Map<String, dynamic> map = snap.data() as Map<String, dynamic>;
+
+    return User(
+      uid: map['uid'],
+      username: map['username'],
+      email: map['email'],
+      regNo: map['regNo'],
+      roomNo: map['roomNo'],
+      hostel: map['hostel'],
+    );
   }
 }
