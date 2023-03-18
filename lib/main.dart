@@ -18,20 +18,29 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Querium',
-      routes: {
-        '/onBoard': (context) => const OnBoarding(),
-        '/login': (context) => const LoginView(),
-        '/signup': (context) => const SignUpView(),
-        '/stHomeScreen': (context) => const StudentHomeScreen(),
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
       },
-      theme: ThemeData(
-        fontFamily: GoogleFonts.poppins().fontFamily,
-        scaffoldBackgroundColor: Colors.white,
+      child: MaterialApp(
+        title: 'Querium',
+        routes: {
+          '/onBoard': (context) => const OnBoarding(),
+          '/login': (context) => const LoginView(),
+          '/signup': (context) => const SignUpView(),
+          '/stHomeScreen': (context) => const StudentHomeScreen(),
+        },
+        theme: ThemeData(
+          fontFamily: GoogleFonts.poppins().fontFamily,
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const splashView(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: const splashView(),
     );
   }
 }
