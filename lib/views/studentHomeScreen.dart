@@ -1,8 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:querium/activities/main_feed.dart';
-import 'package:querium/activities/new_post.dart';
-import 'package:querium/activities/profile.dart';
+import 'package:querium/views/main_feed.dart';
+import 'package:querium/views/new_post.dart';
+import 'package:querium/views/profile.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/utils/global_variables.dart';
 
@@ -36,6 +36,12 @@ class _StudentHomeScreenState extends State<StudentHomeScreen>{
     
     
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: GlobalColor.mainColor,
+        title: const Text('Queries',textAlign: TextAlign.center,),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+      ),
       backgroundColor: Colors.white,
       body: ListView.builder(
         itemCount: post.length,

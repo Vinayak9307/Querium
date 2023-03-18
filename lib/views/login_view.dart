@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:querium/activities/studentHomeScreen.dart';
+import 'package:querium/views/studentHomeScreen.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/views/signup_view.dart';
 import 'package:querium/views/widgets/button_global.dart';
