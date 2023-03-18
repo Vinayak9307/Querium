@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:querium/utils/global_colors.dart';
+import 'package:querium/views/drawer.dart';
 import 'package:querium/views/main_feed.dart';
 import 'package:querium/providers/user_provider.dart';
 
@@ -38,12 +40,27 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: GlobalColor.mainColor,
+        title: const Text('Feed',textAlign: TextAlign.center, style:TextStyle(fontWeight: FontWeight.w600) ),
+        centerTitle: true,
+        //automaticallyImplyLeading: false,
+      ),
       backgroundColor: Colors.white,
       body: ListView.builder(
         itemCount: post.length,
         itemBuilder: (context, index) {
           return const Post();
         },
+      ),
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            children: const [
+              MyDrawer(), 
+            ],
+          ),
+        ),
       ),
     );
   }
