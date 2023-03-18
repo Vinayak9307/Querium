@@ -4,13 +4,13 @@ class TextFormGlobal extends StatefulWidget {
   const TextFormGlobal(
       {super.key,
       required this.controller,
-      required this.text,
+      this.text,
       required this.textInputType,
       required this.obscure,
       this.icon});
 
   final TextEditingController controller;
-  final String text;
+  final String? text;
   final TextInputType textInputType;
   final bool obscure;
   final IconData? icon;
@@ -39,17 +39,18 @@ class _TextFormGlobalState extends State<TextFormGlobal> {
         keyboardType: widget.textInputType,
         obscureText: widget.obscure,
         decoration: InputDecoration(
-            prefixIcon: Align(
-              heightFactor: 1.0,
-              widthFactor: 1.0,
-              child: Icon(widget.icon),
-            ),
-            hintText: widget.text,
-            border: InputBorder.none,
-            contentPadding: const EdgeInsets.only(top: 13),
-            hintStyle: const TextStyle(
-              height: 1,
-            )),
+          prefixIcon: Align(
+            heightFactor: 1.0,
+            widthFactor: 1.0,
+            child: Icon(widget.icon),
+          ),
+          hintText: widget.text,
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.only(top: 13),
+          hintStyle: const TextStyle(
+            height: 1,
+          )
+        ),
       ),
     );
   }

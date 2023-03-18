@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:querium/views/studentHomeScreen.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/views/signup_view.dart';
 import 'package:querium/views/widgets/button_global.dart';
@@ -7,6 +6,7 @@ import 'package:querium/views/widgets/text_field_global.dart';
 
 import '../resources/auth_methods.dart';
 import '../utils/utils.dart';
+import 'nav_bar.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -45,9 +45,12 @@ class _LoginViewState extends State<LoginView> {
       showSnackBar(context, res);
     } else {
       // ignore: use_build_context_synchronously
-      Navigator.push(
+      Navigator.pop(context, '/onBoard');
+
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const StudentHomeScreen()),
+        MaterialPageRoute(builder: (context) => const NavBar()),
       );
     }
   }
