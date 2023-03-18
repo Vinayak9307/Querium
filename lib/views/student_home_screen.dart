@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:querium/activities/main_feed.dart';
+import 'package:querium/views/main_feed.dart';
 import 'package:querium/providers/user_provider.dart';
 
 class StudentHomeScreen extends StatefulWidget {
