@@ -8,6 +8,8 @@ class User {
   String? regNo;
   String? roomNo;
   String? hostel;
+  int? complaintFiled = 0;
+  int? solvedComplaints = 0;
 
   User({
     this.uid,
@@ -16,6 +18,8 @@ class User {
     this.regNo,
     this.hostel,
     this.roomNo,
+    this.complaintFiled,
+    this.solvedComplaints,
   });
 
   //This function returns a map of data related to the user object
@@ -26,6 +30,8 @@ class User {
         "regNo": regNo,
         "roomNo": roomNo,
         "hostel": hostel,
+        "complaintFiled": complaintFiled,
+        "solvedComplaints": solvedComplaints,
       };
 
   //This method returns a user instance based on the document snapshot given by firebase authentication
@@ -39,6 +45,8 @@ class User {
       regNo: map['regNo'],
       roomNo: map['roomNo'],
       hostel: map['hostel'],
+      complaintFiled: map['complaintFiled'],
+      solvedComplaints: map['solvedComplaints'],
     );
   }
 }
