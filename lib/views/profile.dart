@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:querium/views/drawer.dart';
 import 'package:querium/views/pending_complaints.dart';
 import 'package:querium/views/solved_complaints.dart';
 import 'package:querium/utils/global_colors.dart';
@@ -104,9 +105,10 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         backgroundColor: GlobalColor.mainColor,
         
-        title: const Text('Profile',textAlign: TextAlign.center, ),
+        title: const Text('Profile',textAlign: TextAlign.center, style:TextStyle(fontWeight: FontWeight.w600) ),
+        
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        
       ),
 
       body: SingleChildScrollView(
@@ -212,6 +214,17 @@ class _ProfileState extends State<Profile> {
 
             const Divider(),
           ],
+        ),
+      ),
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Container(
+            child:Column(
+              children: const [
+                MyDrawer(), 
+              ],
+            ),
+          ),
         ),
       ),
     );
