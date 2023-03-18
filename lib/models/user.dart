@@ -8,8 +8,8 @@ class User {
   String? regNo;
   String? roomNo;
   String? hostel;
-  int? complaintFiled = 0;
-  int? solvedComplaints = 0;
+  String? complaintFiled;
+  String? solvedComplaints;
 
   User({
     this.uid,
