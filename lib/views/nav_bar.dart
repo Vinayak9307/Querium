@@ -1,9 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:querium/activities/new_post.dart';
 import 'package:querium/activities/profile.dart';
 import 'package:querium/activities/student_home_screen.dart';
-import 'package:querium/views/add_complaint.dart';
+import 'package:querium/views/file_complaint.dart';
 import 'package:querium/views/home_page_view.dart';
 
 import '../utils/global_colors.dart';
@@ -17,7 +16,7 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
   final Widget _stuHomeScreen = const StudentHomeScreen();
-  final Widget _addComplaint = const AddComplaint();
+  final Widget _fileComplaint = const FileComplaint();
   final Widget _profile = const Profile();
   final Widget _notification = const HomePage();
 
@@ -29,7 +28,7 @@ class _NavBarState extends State<NavBar> {
     setState(() {
       screens = [
         _stuHomeScreen,
-        _addComplaint,
+        _fileComplaint,
         _profile,
         _notification,
       ];

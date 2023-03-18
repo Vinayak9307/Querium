@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:querium/utils/global_colors.dart';
+import 'package:querium/views/file_complaint.dart';
 import 'package:querium/views/onboarding.dart';
 
 import 'nav_bar.dart';
