@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:querium/views/profile.dart';
 import 'package:querium/views/student_home_screen.dart';
+import 'package:querium/views/about_page_view.dart';
 import 'package:querium/views/file_complaint.dart';
 import 'package:querium/views/home_page_view.dart';
 
@@ -18,7 +19,7 @@ class _NavBarState extends State<NavBar> {
   final Widget _stuHomeScreen = const StudentHomeScreen();
   final Widget _fileComplaint = const FileComplaint();
   final Widget _profile = const Profile();
-  final Widget _notification = const HomePage();
+  final Widget _notification = const AboutPageView();
 
   List<Widget>? screens;
 
