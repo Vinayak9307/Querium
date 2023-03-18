@@ -1,39 +1,77 @@
-import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:querium/utils/utils.dart';
 import 'package:querium/views/widgets/button_global.dart';
-import 'package:querium/views/widgets/text_field_global.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
+import '../models/complaint.dart';
+import '../models/user.dart' as model;
+import '../providers/user_provider.dart';
+import '../resources/firestore_methods.dart';
 import '../utils/drop_down_items.dart';
 import '../utils/global_colors.dart';
 
-String? selectedCategory = '';
-String? title = '';
-String? description = '';
-final formKey = GlobalKey<FormState>();
-
 class FileComplaint extends StatefulWidget {
   const FileComplaint({super.key});
-
-  
 
   @override
   State<FileComplaint> createState() => _FileComplaintState();
 }
 
 class _FileComplaintState extends State<FileComplaint> {
+  //Form variables
+  String? selectedCategory = '';
+  String? title = '';
+  String? description = '';
+  final formKey = GlobalKey<FormState>();
   final TextEditingController controller = TextEditingController();
-
-
+  bool isLoading = false;
+  model.User? user;
   String imageUrl = '';
   final List<Uint8List> _imgList = [];
   int _counter = 0;
-  void showImage() async{
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      user = Provider.of<UserProvider>(context, listen: false).getUser;
+    });
+  }
+
+  void addComplaint() async {
+    setState(() {
+      isLoading = true;
+    });
+    String compId = const Uuid().v1();
+
+    String res = await FirestoreMethods().uploadComplaint(
+      complaint: Complaint(
+          uid: user!.getData()['uid'],
+          compId: compId,
+          email: user!.getData()['email'],
+          regNo: user!.getData()['regNo'],
+          hostel: user!.getData()['hostel'],
+          roomNo: user!.getData()['roomNo'],
+          title: title!,
+          category: selectedCategory!,
+          description: description!,
+          filingTime: DateTime.now(),
+          images: [],
+          name: user!.getData()['username'],
+          status: ComplaintStatus.pending.name,
+          upvotes: []),
+      images: _imgList,
+    );
+    print(res);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  void showImage() async {
     Uint8List im = await pickImage(ImageSource.gallery);
     setState(() {
       _imgList.add(im);
@@ -45,9 +83,7 @@ class _FileComplaintState extends State<FileComplaint> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {
-        FocusScope.of(context).requestFocus(FocusNode())
-      },
+      onTap: () => {FocusScope.of(context).requestFocus(FocusNode())},
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -55,12 +91,12 @@ class _FileComplaintState extends State<FileComplaint> {
             elevation: 0,
             centerTitle: true,
             title: const Text(
-            "File a Complaint",
-            style : TextStyle(
-              fontSize: 32,
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
+              "File a Complaint",
+              style: TextStyle(
+                fontSize: 32,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           body: SingleChildScrollView(
@@ -70,8 +106,10 @@ class _FileComplaintState extends State<FileComplaint> {
                 padding: const EdgeInsets.only(left: 18, right: 18),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children:  [
-                    const SizedBox(height: 35,),
+                  children: [
+                    const SizedBox(
+                      height: 35,
+                    ),
                     const Text(
                       "Choose the category ?",
                       textAlign: TextAlign.start,
@@ -90,9 +128,11 @@ class _FileComplaintState extends State<FileComplaint> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     DropdownButtonFormField<String>(
-                      items: categories, 
+                      items: categories,
                       menuMaxHeight: 200,
                       elevation: 0,
                       decoration: InputDecoration(
@@ -126,16 +166,17 @@ class _FileComplaintState extends State<FileComplaint> {
                         ),
                       ),
                       //width: MediaQuery.of(context).size.width*0.91,
-                      validator: (value) => value == null
-                      ? "Please select a category"
-                      : null,
+                      validator: (value) =>
+                          value == null ? "Please select a category" : null,
                       onChanged: (value) {
                         setState(() {
                           selectedCategory = value;
                         });
                       },
                     ),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     const Text(
                       "Title",
                       textAlign: TextAlign.start,
@@ -145,7 +186,9 @@ class _FileComplaintState extends State<FileComplaint> {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    const SizedBox(height: 8,),
+                    const SizedBox(
+                      height: 8,
+                    ),
                     TextFormField(
                       minLines: 1,
                       maxLines: 4,
@@ -193,7 +236,9 @@ class _FileComplaintState extends State<FileComplaint> {
                         contentPadding: const EdgeInsets.only(top: 13, left: 8),
                       ),
                     ),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     const Text(
                       "Add details",
                       textAlign: TextAlign.start,
@@ -212,7 +257,9 @@ class _FileComplaintState extends State<FileComplaint> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     TextFormField(
                       minLines: 1,
                       maxLines: 4,
@@ -260,7 +307,9 @@ class _FileComplaintState extends State<FileComplaint> {
                         contentPadding: const EdgeInsets.only(top: 13, left: 8),
                       ),
                     ),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     const Text(
                       "Add photos",
                       textAlign: TextAlign.start,
@@ -279,7 +328,9 @@ class _FileComplaintState extends State<FileComplaint> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       children: [
                         IconButton(
@@ -291,35 +342,32 @@ class _FileComplaintState extends State<FileComplaint> {
                           color: Colors.blue,
                           onPressed: showImage,
                         ),
-                        const SizedBox(width: 30,),
+                        const SizedBox(
+                          width: 30,
+                        ),
                         Column(
                           children: [
-                            _imgList.isNotEmpty ? CircleAvatar(
-                              radius: 64,
-                              backgroundImage: MemoryImage(_imgList[0]),):Container(),
-                          ],
-                              ),
+                            _imgList.isNotEmpty
+                                ? CircleAvatar(
+                                    radius: 64,
+                                    backgroundImage: MemoryImage(_imgList[0]),
+                                  )
+                                : Container(),
                           ],
                         ),
-                    const SizedBox(height: 50,),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
                     ButtonGlobal(
                       text: "Submit",
                       onTap: () async {
-
                         if (formKey.currentState!.validate()) {
-                          // String itemName = _controllerName.text;
-                          // String itemQuantity = _controllerQuantity.text;
-
-                          //Create a Map of data
-                          Map<String, String> dataToSend = {
-                            // 'name': itemName,
-                            // 'quantity': itemQuantity,
-                            'image': imageUrl,
-                          };
-
-                          //Add a new item
+                          addComplaint();
                         }
                       },
+                      isLoading: isLoading,
                     ),
                   ],
                 ),
@@ -327,7 +375,8 @@ class _FileComplaintState extends State<FileComplaint> {
             ),
           ),
         ),
-      ),);
+      ),
+    );
   }
 }
 
@@ -361,4 +410,3 @@ class ImageShow extends StatelessWidget {
     );
   }
 }
-

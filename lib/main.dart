@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:querium/activities/studentHomeScreen.dart';
+import 'package:querium/activities/student_home_screen.dart';
+import 'package:querium/providers/user_provider.dart';
 import 'package:querium/views/login_view.dart';
 import 'package:querium/views/onboarding.dart';
 import 'package:querium/views/signup_view.dart';
 import 'package:querium/views/splash_view.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,14 +20,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
-
-        if (!currentFocus.hasPrimaryFocus) {
-          currentFocus.unfocus();
-        }
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Querium',
         routes: {

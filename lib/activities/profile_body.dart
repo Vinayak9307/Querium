@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:querium/activities/your_query.dart';
 import 'package:querium/models/user.dart' as model;
+import 'package:querium/providers/user_provider.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -13,24 +13,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  model.User? user;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getUser();
-  }
-
-  void getUser() async {
-    DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-    setState(() {
-      user = model.User.getUser(snapshot.data() as Map<String, dynamic>);
-    });
-  }
-
   final mydecoration = BoxDecoration(
       color: Colors.deepPurple.shade200,
       borderRadius: BorderRadius.circular(15),
@@ -49,6 +31,9 @@ class _BodyState extends State<Body> {
       ]);
   @override
   Widget build(BuildContext context) {
+    //User object is being initialised with the data from the provider
+    model.User user = Provider.of<UserProvider>(context, listen: false).getUser;
+
     return Column(
       children: [
         SizedBox(
@@ -83,7 +68,7 @@ class _BodyState extends State<Body> {
             decoration: mydecoration,
             child: Text(
               // ignore: prefer_interpolation_to_compose_strings
-              '    ' + user!.getData()['username'],
+              '    ' + user.getData()['username'],
               style: const TextStyle(
                 fontSize: 30,
                 color: Colors.white,
@@ -116,7 +101,7 @@ class _BodyState extends State<Body> {
             decoration: mydecoration,
             child: Text(
               // ignore: prefer_interpolation_to_compose_strings
-              '    ' + user!.getData()['email'],
+              '    ' + user.getData()['email'],
               style: const TextStyle(
                 fontSize: 30,
                 color: Colors.white,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:querium/activities/main_feed.dart';
+import 'package:querium/providers/user_provider.dart';
 
 class StudentHomeScreen extends StatefulWidget {
   const StudentHomeScreen({super.key});
@@ -10,6 +12,19 @@ class StudentHomeScreen extends StatefulWidget {
 }
 
 class _StudentHomeScreenState extends State<StudentHomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    loadUserData();
+  }
+
+  //This method uses the user provider to load the user data
+  //when the user comes to the home screen
+  loadUserData() async {
+    UserProvider userProvider = Provider.of(context, listen: false);
+    await userProvider.refreshUser();
+  }
+
   final List post = [
     'post 1',
     'post 2',

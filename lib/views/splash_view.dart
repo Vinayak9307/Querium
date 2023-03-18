@@ -48,7 +48,7 @@ class _splashViewState extends State<splashView> {
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const FileComplaint(),
+          builder: (context) => next,
         ),
       ),
     );
