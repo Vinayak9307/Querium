@@ -22,7 +22,7 @@ class AuthMethods {
     User currentAdmin = _auth.currentUser!;
 
     DocumentSnapshot snapshot =
-        await _firestore.collection('admins').doc(currentAdmin.uid).get();
+        await _firestore.collection('admin').doc(currentAdmin.uid).get();
 
     return Admin.getAdmin(snapshot);
   }
