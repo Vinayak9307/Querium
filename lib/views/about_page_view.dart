@@ -8,49 +8,27 @@ class AboutPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: GlobalColor.mainColor,
-          elevation: 0,
-          centerTitle: true,
-          title: const Text(
-          "About Us",
-          style : TextStyle(
-            fontSize: 22,
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-          ),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: GlobalColor.mainColor,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+        "About Us",
+        style : TextStyle(
+          fontSize: 22,
+          color: Colors.white,
+          fontWeight: FontWeight.w400,
         ),
-        body: Container(
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
           padding: const EdgeInsets.only(left: 15, right: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
-              SizedBox(height: 25,),
-              Text(
-                "The Idea Behind it ?",
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Color.fromARGB(255, 78, 76, 76),
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              SizedBox(
-                height: 2,
-              ),
-              Text(
-                'In this fast-moving world with intensive coursework, students find very less time to share their problems.   At every university, the students reside in hostels or at home, and any and every problem related to college have offline complaint registration opening only 2-3 hours a day which some students miss.\nThis is the reason why Querium is here.',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color.fromARGB(255, 61, 61, 61),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10,),
               Text(
                 "Team",
                 textAlign: TextAlign.start,
@@ -96,10 +74,32 @@ class AboutPageView extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
+              Text(
+                "The Idea Behind it ?",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Color.fromARGB(255, 78, 76, 76),
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              SizedBox(
+                height: 2,
+              ),
+              Text(
+                'In this fast-moving world with intensive coursework, students find very less time to share their problems.   At every university, the students reside in hostels or at home, and any and every problem related to college have offline complaint registration opening only 2-3 hours a day which some students miss.\nThis is the reason why Querium is here.',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Color.fromARGB(255, 61, 61, 61),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),
-      )
+      ),
     );
   }
 }

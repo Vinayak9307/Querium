@@ -45,7 +45,6 @@ class CardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 140,
       child: Container(
         padding: const EdgeInsets.fromLTRB(10, 8.0, 8.0, 8.0),
         width: double.infinity,
@@ -69,12 +68,12 @@ class CardView extends StatelessWidget {
             Column(
               children: [
                 const SizedBox(height: 5,),
-                Container(alignment: Alignment.centerLeft , width: 250,child: Text(qoute, style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 90, 88, 88)),),),
+                Container(alignment: Alignment.centerLeft , width: MediaQuery.of(context).size.width*0.55,child: Text(qoute, style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 90, 88, 88)),),),
                 const SizedBox(height: 1,),
-                Container(alignment: Alignment.centerRight , width: 250,child: Text(name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),),),
+                Container(alignment: Alignment.centerRight ,  width: MediaQuery.of(context).size.width*0.55,child: Text(name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),),),
                 const SizedBox(height: 12,),
                 Container(
-                  width: 250,
+                  width: MediaQuery.of(context).size.width*0.5,
                   alignment: Alignment.centerLeft,
                   child: Row(
                     //mainAxisAlignment: MainAxisAlignment.start,
