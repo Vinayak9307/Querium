@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:querium/views/user/drawer.dart';
 import 'package:querium/views/user/pending_complaints.dart';
 import 'package:querium/utils/global_colors.dart';
+import 'package:querium/views/user/solved_complaints.dart';
 import '../../providers/user_provider.dart';
 import '../../resources/auth_methods.dart';
 import '../../resources/storage_methods.dart';
@@ -65,7 +66,7 @@ class _ProfileState extends State<Profile> {
   void onTapsolved() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const PendingComplaints()),
+      MaterialPageRoute(builder: (context) => const SolvedComplaints()),
     );
   }
 

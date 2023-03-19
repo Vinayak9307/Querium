@@ -42,13 +42,16 @@ class _QueryCommentsState extends State<QueryComments> {
           Padding(
             padding: const EdgeInsets.fromLTRB(2.0, 8.0, 2.0, 0.0),
             child: ListTile(
-              
               title: Text(
                 data[i]['name'],
-                style: TextStyle(fontWeight: FontWeight.bold ,),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.start,
               ),
-              subtitle: Text(data[i]['message'] ,),
+              subtitle: Text(
+                data[i]['message'],
+              ),
               trailing: Text(data[i]['date'], style: TextStyle(fontSize: 10)),
             ),
           )
@@ -62,12 +65,10 @@ class _QueryCommentsState extends State<QueryComments> {
       appBar: AppBar(
         title: Text("Comment Page"),
         centerTitle: true,
-        backgroundColor:GlobalColor.mainColor,
-        
+        backgroundColor: GlobalColor.mainColor,
       ),
       body: Container(
         child: CommentBox(
-          
           child: commentChild(filedata),
           labelText: 'Write a comment...',
           errorText: 'Comment cannot be blank',

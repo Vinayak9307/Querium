@@ -5,7 +5,7 @@ import 'package:querium/utils/global_colors.dart';
 import 'package:querium/utils/post_card.dart';
 import 'package:querium/views/user/drawer.dart';
 import 'package:querium/providers/user_provider.dart';
-import 'package:querium/views/user/query_images.dart';
+
 
 
 
@@ -59,6 +59,9 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
         stream: FirebaseFirestore.instance.collection('complaints').snapshots(),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if(snapshot.connectionState == ConnectionState.waiting){
+                return const Center(child: CircularProgressIndicator(),);
+              }
           return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {

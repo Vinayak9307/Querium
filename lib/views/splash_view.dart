@@ -26,7 +26,7 @@ class _splashViewState extends State<splashView> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
-            return const AdminNavBar();
+            return const NavBar();
           } else if (snapshot.hasError) {
             return Center(
               child: Text('${snapshot.error}'),
