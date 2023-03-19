@@ -1,16 +1,20 @@
 // ignore_for_file: non_constant_identifier_names, override_on_non_overriding_member
 
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:querium/views/pending_complaints.dart';
-import 'package:querium/views/solved_complaints.dart';
 import 'package:querium/utils/global_colors.dart';
 
 import '../models/user.dart' as model;
 import '../providers/user_provider.dart';
 import '../resources/auth_methods.dart';
+import '../resources/storage_methods.dart';
 import '../utils/drop_down_items.dart';
+import '../utils/utils.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -31,6 +35,7 @@ class _ProfileState extends State<Profile> {
   model.User? user;
   String tempHostel = "";
   String tempRoom = "";
+  String? profileURL = "";
 
   //this is a controller for editing the hostel name or Room no
   late TextEditingController controller;
@@ -47,6 +52,7 @@ class _ProfileState extends State<Profile> {
     hostel = userMap['hostel'];
     complaintFiled = userMap['complaintFiled'];
     solvedComplaint = userMap['solvedComplaints'];
+    profileURL = userMap['profileURL'];
     controller = TextEditingController();
     tempHostel = hostel;
     tempRoom = roomNo;
@@ -116,16 +122,15 @@ class _ProfileState extends State<Profile> {
             //this stack contains the profile image and its edit option
             Stack(
               children: [
-                SizedBox(
-                  width: 120,
-                  height: 120,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: const Image(
-                      image: AssetImage("assets/images/index.png"),
-                    ),
-                  ),
-                ),
+                profileURL != null
+                    ? CircleAvatar(
+                        radius: 60,
+                        backgroundImage: NetworkImage(profileURL!),
+                      )
+                    : const CircleAvatar(
+                        radius: 60,
+                        backgroundImage: AssetImage("assets/images/index.png"),
+                      ),
                 Positioned(
                   bottom: 0,
                   right: 0,
@@ -140,7 +145,9 @@ class _ProfileState extends State<Profile> {
                         Icons.camera_alt_outlined,
                         color: Colors.white,
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        uploadImage(userMap);
+                      },
                     ),
                   ),
                 ),
@@ -171,8 +178,10 @@ class _ProfileState extends State<Profile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                complaintsButton(4, 'complaints pending', onTapPending, false),
-                complaintsButton(5, 'complaints solved', onTapsolved, false),
+                complaintsButton(
+                    complaintFiled, 'complaints pending', onTapPending, false),
+                complaintsButton(
+                    solvedComplaint, 'solved complaint', onTapsolved, false),
               ],
             ),
             //for spacing
@@ -257,7 +266,7 @@ class _ProfileState extends State<Profile> {
               )
             : Column(
                 children: [
-                  Text(number.toString(),
+                  Text(number,
                       style: TextStyle(
                           fontFamily: GoogleFonts.poppins().fontFamily,
                           fontSize: 15)),
@@ -366,5 +375,15 @@ class _ProfileState extends State<Profile> {
   loadUserData() async {
     UserProvider userProvider = Provider.of(context, listen: false);
     await userProvider.refreshUser();
+  }
+
+  uploadImage(userMap) async {
+    Uint8List im = await pickImage(ImageSource.gallery);
+    String tempProfileURL = await StorageMethods()
+        .uploadImageToStorage("profilePic", im, false, null);
+    setState(() {
+      profileURL = tempProfileURL;
+      AuthMethods().changeState("profileURL", profileURL!, userMap);
+    });
   }
 }

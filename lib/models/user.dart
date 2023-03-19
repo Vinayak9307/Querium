@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class User {
   String? uid;
   String? username;
+  String? profileURL;
   String? email;
   String? regNo;
   String? roomNo;
@@ -15,6 +16,7 @@ class User {
     this.uid,
     this.username,
     this.email,
+    this.profileURL,
     this.regNo,
     this.hostel,
     this.roomNo,
@@ -27,6 +29,7 @@ class User {
         "uid": uid,
         "username": username,
         "email": email,
+        "profileURL": profileURL,
         "regNo": regNo,
         "roomNo": roomNo,
         "hostel": hostel,
@@ -42,6 +45,7 @@ class User {
       uid: map['uid'],
       username: map['username'],
       email: map['email'],
+      profileURL: map['profileURL'],
       regNo: map['regNo'],
       roomNo: map['roomNo'],
       hostel: map['hostel'],
