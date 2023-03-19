@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:querium/utils/global_colors.dart';
+import 'package:querium/utils/post_card.dart';
 import 'package:querium/views/user/drawer.dart';
 import 'package:querium/providers/user_provider.dart';
 
@@ -45,16 +46,27 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
         backgroundColor: GlobalColor.mainColor,
         title: const Text('Feed',
             textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.w600)),
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w400
+              ),
+            ),
         centerTitle: true,
         //automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.white,
-      body: ListView.builder(
-        itemCount: post.length,
-        itemBuilder: (context, index) {
-          return const Post();
-        },
+      body: Column(
+        children: [
+          const SizedBox(height: 10,),
+          Expanded(
+            child: ListView.builder(
+              itemCount: post.length,
+              itemBuilder: (context, index) {
+                return const PostCardView();
+              },
+            ),
+          ),
+        ],
       ),
       drawer: Drawer(
         child: SingleChildScrollView(
