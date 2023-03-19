@@ -93,9 +93,9 @@ class _FileComplaintState extends State<FileComplaint> {
             title: const Text(
               "File a Complaint",
               style: TextStyle(
-                //fontSize: 32,
+                fontSize: 22,
                 color: Colors.white,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ),

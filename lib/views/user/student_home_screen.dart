@@ -45,9 +45,11 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GlobalColor.mainColor,
-        title: const Text('Feed',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.w600)),
+        title: const Text(
+          'Feed',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+        ),
         centerTitle: true,
         //automaticallyImplyLeading: false,
       ),

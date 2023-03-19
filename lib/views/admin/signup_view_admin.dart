@@ -54,329 +54,337 @@ class _SignUpViewAdminState extends State<SignUpViewAdmin> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: GestureDetector(
-          onTap: () => {
-            FocusScope.of(context).requestFocus(
-              FocusNode(),
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        leading: GestureDetector(
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+          onTap: () {
+            Navigator.pop(context);
           },
-          child: SingleChildScrollView(
-            child: Form(
-              key: formKey,
-              child: Container(
-                padding: const EdgeInsets.only(left: 18, right: 18),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Querium",
-                        style: TextStyle(
-                          color: GlobalColor.mainColor,
-                          fontSize: 45,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Text(
-                      "Add a new account",
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: GestureDetector(
+        onTap: () => {
+          FocusScope.of(context).requestFocus(
+            FocusNode(),
+          ),
+        },
+        child: SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: Container(
+              padding: const EdgeInsets.only(left: 18, right: 18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Querium",
                       style: TextStyle(
-                        color: GlobalColor.textColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
+                        color: GlobalColor.mainColor,
+                        fontSize: 45,
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Text(
+                    "Add a new account",
+                    style: TextStyle(
+                      color: GlobalColor.textColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
                     ),
-                    TextFormField(
-                      minLines: 1,
-                      maxLines: 1,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Username can't be left empty.";
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          username = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: const Align(
-                          heightFactor: 1.0,
-                          widthFactor: 1.0,
-                          child: Icon(Icons.person_2_outlined),
-                        ),
-                        hintText: "Username",
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        contentPadding: const EdgeInsets.only(top: 13, left: 8),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    minLines: 1,
+                    maxLines: 1,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Username can't be left empty.";
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        username = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      prefixIcon: const Align(
+                        heightFactor: 1.0,
+                        widthFactor: 1.0,
+                        child: Icon(Icons.person_2_outlined),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      minLines: 1,
-                      maxLines: 1,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Email can't be left empty.";
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          email = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: const Align(
-                          heightFactor: 1.0,
-                          widthFactor: 1.0,
-                          child: Icon(Icons.email_outlined),
-                        ),
-                        hintText: "Email",
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        contentPadding: const EdgeInsets.only(top: 13, left: 8),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      minLines: 1,
-                      maxLines: 1,
-                      obscureText: true,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Password can't be left empty.";
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          password = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: const Align(
-                          heightFactor: 1.0,
-                          widthFactor: 1.0,
-                          child: Icon(Icons.password_outlined),
-                        ),
-                        hintText: "Password",
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        contentPadding: const EdgeInsets.only(top: 13, left: 8),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      minLines: 1,
-                      maxLines: 1,
-                      obscureText: true,
-                      validator: (value) {
-                        if (value!.isEmpty || value.toString() != password) {
-                          return "Password don't match";
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                        prefixIcon: const Align(
-                          heightFactor: 1.0,
-                          widthFactor: 1.0,
-                          child: Icon(Icons.key_outlined),
-                        ),
-                        hintText: "Confirm Password",
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        contentPadding: const EdgeInsets.only(top: 13, left: 8),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    DropdownButtonFormField<String>(
-                      items: categories,
-                      menuMaxHeight: 200,
-                      elevation: 0,
-                      decoration: InputDecoration(
-                        hintText: "Category",
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 159, 158, 158),
-                            width: 1.1,
-                          ),
+                      hintText: "Username",
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
                         ),
                       ),
-                      //width: MediaQuery.of(context).size.width*0.91,
-                      validator: (value) =>
-                          value == null ? "Please select a category" : null,
-                      onChanged: (value) {
-                        setState(() {
-                          category = value;
-                        });
-                      },
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      contentPadding: const EdgeInsets.only(top: 13, left: 8),
                     ),
-                    const SizedBox(
-                      height: 20,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    minLines: 1,
+                    maxLines: 1,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Email can't be left empty.";
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        email = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      prefixIcon: const Align(
+                        heightFactor: 1.0,
+                        widthFactor: 1.0,
+                        child: Icon(Icons.email_outlined),
+                      ),
+                      hintText: "Email",
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      contentPadding: const EdgeInsets.only(top: 13, left: 8),
                     ),
-                    const SizedBox(
-                      height: 50,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    minLines: 1,
+                    maxLines: 1,
+                    obscureText: true,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Password can't be left empty.";
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        password = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      prefixIcon: const Align(
+                        heightFactor: 1.0,
+                        widthFactor: 1.0,
+                        child: Icon(Icons.password_outlined),
+                      ),
+                      hintText: "Password",
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      contentPadding: const EdgeInsets.only(top: 13, left: 8),
                     ),
-                    ButtonGlobal(
-                      text: "Sign Up",
-                      onTap: () async {
-                        if (formKey.currentState!.validate()) {
-                          signUpUser();
-                        }
-                      },
-                      isLoading: isLoading,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    minLines: 1,
+                    maxLines: 1,
+                    obscureText: true,
+                    validator: (value) {
+                      if (value!.isEmpty || value.toString() != password) {
+                        return "Password don't match";
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {},
+                    decoration: InputDecoration(
+                      prefixIcon: const Align(
+                        heightFactor: 1.0,
+                        widthFactor: 1.0,
+                        child: Icon(Icons.key_outlined),
+                      ),
+                      hintText: "Confirm Password",
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      contentPadding: const EdgeInsets.only(top: 13, left: 8),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  DropdownButtonFormField<String>(
+                    items: categories,
+                    menuMaxHeight: 200,
+                    elevation: 0,
+                    decoration: InputDecoration(
+                      hintText: "Category",
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                    ),
+                    //width: MediaQuery.of(context).size.width*0.91,
+                    validator: (value) =>
+                        value == null ? "Please select a category" : null,
+                    onChanged: (value) {
+                      setState(() {
+                        category = value;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  ButtonGlobal(
+                    text: "Sign Up",
+                    onTap: () async {
+                      if (formKey.currentState!.validate()) {
+                        signUpUser();
+                      }
+                    },
+                    isLoading: isLoading,
+                  ),
+                ],
               ),
             ),
           ),
