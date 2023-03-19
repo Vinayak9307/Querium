@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:querium/utils/utils.dart';
+import 'package:querium/views/drawer.dart';
 import 'package:querium/views/widgets/button_global.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -93,7 +94,7 @@ class _FileComplaintState extends State<FileComplaint> {
             title: const Text(
               "File a Complaint",
               style: TextStyle(
-                fontSize: 32,
+                //fontSize: 32,
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
               ),
@@ -374,8 +375,18 @@ class _FileComplaintState extends State<FileComplaint> {
               ),
             ),
           ),
+          drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            children: const [
+              MyDrawer(), 
+            ],
+          ),
         ),
       ),
+        ),
+      ),
+      
     );
   }
 }
