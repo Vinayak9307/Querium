@@ -27,7 +27,6 @@ class _FileComplaintState extends State<FileComplaint> {
   String? title = '';
   String? description = '';
   final formKey = GlobalKey<FormState>();
-  final TextEditingController controller = TextEditingController();
   bool isLoading = false;
   model.User? user;
   String imageUrl = '';

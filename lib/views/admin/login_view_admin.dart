@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:querium/utils/global_colors.dart';
+import 'package:querium/views/admin/signup_view_admin.dart';
+import 'package:querium/views/user/signup_view.dart';
 import 'package:querium/views/widgets/button_global.dart';
 import 'package:querium/views/widgets/text_field_global.dart';
+
+import '../../resources/auth_methods.dart';
+import '../../utils/utils.dart';
+import '../user/nav_bar.dart';
 
 class LoginViewAdmin extends StatefulWidget {
   const LoginViewAdmin({super.key});
@@ -11,17 +17,43 @@ class LoginViewAdmin extends StatefulWidget {
 }
 
 class _LoginViewAdminState extends State<LoginViewAdmin> {
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   bool isLoading = false;
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
+  }
+
+  void loginUser() async {
+    setState(() {
+      isLoading = true;
+    });
+    String res = await AuthMethods().loginUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+    setState(() {
+      isLoading = false;
+    });
+    if (res != "Log In Success") {
+      // ignore: use_build_context_synchronously
+      showSnackBar(context, res);
+    } else {
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context, '/onBoard');
+
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const NavBar()),
+      );
+    }
   }
 
   @override
@@ -65,7 +97,7 @@ class _LoginViewAdminState extends State<LoginViewAdmin> {
                 height: 40,
               ),
               TextFormGlobal(
-                controller: emailController,
+                controller: _emailController,
                 text: 'Email',
                 obscure: false,
                 textInputType: TextInputType.emailAddress,
@@ -75,7 +107,7 @@ class _LoginViewAdminState extends State<LoginViewAdmin> {
                 height: 40,
               ),
               TextFormGlobal(
-                controller: passwordController,
+                controller: _passwordController,
                 text: 'Password',
                 obscure: true,
                 textInputType: TextInputType.text,
@@ -84,41 +116,44 @@ class _LoginViewAdminState extends State<LoginViewAdmin> {
               const SizedBox(
                 height: 60,
               ),
-              const ButtonGlobal(
+              ButtonGlobal(
                 text: "Sign In",
+                onTap: loginUser,
+                isLoading: isLoading,
               ),
             ],
           ),
         )),
       ),
-      // bottomNavigationBar: Container(
-      //   height: 50,
-      //   color: Colors.white,
-      //   alignment: Alignment.center,
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       const Text(
-      //         "Don\'t have an account ? ",
-      //       ),
-      //       InkWell(
-      //         onTap: () {
-      //           Navigator.push(
-      //             context,
-      //             MaterialPageRoute(builder: (context) => SignUpView()),
-      //           );
-      //         },
-      //         child: Text(
-      //           "Sign Up",
-      //           style: TextStyle(
-      //             color: GlobalColor.mainColor,
-      //             fontWeight: FontWeight.bold,
-      //           ),
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
+      bottomNavigationBar: Container(
+        height: 50,
+        color: Colors.white,
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Don't have an account ? ",
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SignUpViewAdmin()),
+                );
+              },
+              child: Text(
+                "Sign Up",
+                style: TextStyle(
+                  color: GlobalColor.mainColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
