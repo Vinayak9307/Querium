@@ -3,16 +3,16 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:querium/utils/utils.dart';
-import 'package:querium/views/drawer.dart';
+import 'package:querium/views/user/drawer.dart';
 import 'package:querium/views/widgets/button_global.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
-import '../models/complaint.dart';
-import '../models/user.dart' as model;
-import '../providers/user_provider.dart';
-import '../resources/firestore_methods.dart';
-import '../utils/drop_down_items.dart';
-import '../utils/global_colors.dart';
+import '../../models/complaint.dart';
+import '../../models/user.dart' as model;
+import '../../providers/user_provider.dart';
+import '../../resources/firestore_methods.dart';
+import '../../utils/drop_down_items.dart';
+import '../../utils/global_colors.dart';
 
 class FileComplaint extends StatefulWidget {
   const FileComplaint({super.key});
@@ -376,17 +376,16 @@ class _FileComplaintState extends State<FileComplaint> {
             ),
           ),
           drawer: Drawer(
-        child: SingleChildScrollView(
-          child: Column(
-            children: const [
-              MyDrawer(), 
-            ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: const [
+                  MyDrawer(),
+                ],
+              ),
+            ),
           ),
         ),
       ),
-        ),
-      ),
-      
     );
   }
 }

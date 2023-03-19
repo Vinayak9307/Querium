@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:querium/utils/global_colors.dart';
-import 'package:querium/views/drawer.dart';
-import 'package:querium/views/main_feed.dart';
+import 'package:querium/views/user/drawer.dart';
 import 'package:querium/providers/user_provider.dart';
+
+import 'main_feed.dart';
 
 class StudentHomeScreen extends StatefulWidget {
   const StudentHomeScreen({super.key});
@@ -42,7 +43,9 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GlobalColor.mainColor,
-        title: const Text('Feed',textAlign: TextAlign.center, style:TextStyle(fontWeight: FontWeight.w600) ),
+        title: const Text('Feed',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.w600)),
         centerTitle: true,
         //automaticallyImplyLeading: false,
       ),
@@ -57,7 +60,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: const [
-              MyDrawer(), 
+              MyDrawer(),
             ],
           ),
         ),
