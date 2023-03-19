@@ -41,8 +41,7 @@ class App extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        home: const LoginViewAdmin(),
-
+        home: const splashView(),
       ),
     );
   }
