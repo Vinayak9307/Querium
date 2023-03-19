@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:querium/views/about_page_view.dart';
+import 'package:querium/views/comment_box.dart';
 import 'package:querium/views/student_home_screen.dart';
 import 'package:querium/providers/user_provider.dart';
 import 'package:querium/views/login_view.dart';
@@ -39,7 +41,7 @@ class App extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        home: const splashView(),
+        home:  splashView(),
       ),
     );
   }
