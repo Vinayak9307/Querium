@@ -3,8 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/views/user/drawer.dart';
 import 'package:querium/providers/user_provider.dart';
+import 'package:querium/views/user/query_images.dart';
 
-import 'main_feed.dart';
+
 
 class StudentHomeScreen extends StatefulWidget {
   const StudentHomeScreen({super.key});

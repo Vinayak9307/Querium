@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:querium/utils/global_colors.dart';
 
-import 'main_feed.dart';
+import 'query_images.dart';
 
 class PendingComplaints extends StatefulWidget {
   const PendingComplaints({super.key});
