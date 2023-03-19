@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:querium/utils/global_colors.dart';
+import 'package:querium/utils/post_card.dart';
 import 'package:querium/views/user/drawer.dart';
 import 'package:querium/providers/user_provider.dart';
 import 'package:querium/views/user/query_images.dart';
@@ -44,17 +46,26 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GlobalColor.mainColor,
-        title: const Text('Feed',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.w600)),
+        title: const Text(
+          'Feed',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+        ),
         centerTitle: true,
         //automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.white,
-      body: ListView.builder(
-        itemCount: post.length,
-        itemBuilder: (context, index) {
-          return const Post();
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('complaints').snapshots(),
+        builder: (context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                return PostCardView(
+                  snap: snapshot.data!.docs[index].data(),
+                );
+              });
         },
       ),
       drawer: Drawer(
