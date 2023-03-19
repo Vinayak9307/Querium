@@ -20,7 +20,10 @@ import 'package:flutter/material.dart';
 //   "K.N.G.H",
 // ];
 List<DropdownMenuItem<String>>? categories = const [
-  DropdownMenuItem(value: "Administration", child: Text("Administration"),),
+  DropdownMenuItem(
+    value: "Administration",
+    child: Text("Administration"),
+  ),
   DropdownMenuItem(value: "Gymkhana", child: Text("Gymkhana")),
   DropdownMenuItem(value: "General", child: Text("General")),
   DropdownMenuItem(value: "Campus", child: Text("Campus")),
@@ -36,5 +39,20 @@ List<DropdownMenuItem<String>>? categories = const [
   DropdownMenuItem(value: "D.J. Hostel", child: Text("D.J. Hostel")),
   DropdownMenuItem(value: "I.H-B Hostel", child: Text("I.H-B Hostel")),
   DropdownMenuItem(value: "I.H-A Hostel", child: Text("I.H-A Hostel")),
-  DropdownMenuItem(value: "K.N.G.H", child:Text("K.N.G.H")),
+  DropdownMenuItem(value: "K.N.G.H", child: Text("K.N.G.H")),
+];
+
+List<DropdownMenuItem<String>>? hostelChoice = const [
+  DropdownMenuItem(value: "Tilak ", child: Text("Tilak")),
+  DropdownMenuItem(value: "Patel ", child: Text("Patel")),
+  DropdownMenuItem(value: "Malviya", child: Text("Malviya")),
+  DropdownMenuItem(value: "Tandon ", child: Text("Tandon")),
+  DropdownMenuItem(value: "P.G. ", child: Text("P.G.")),
+  DropdownMenuItem(value: "Raman ", child: Text("Raman")),
+  DropdownMenuItem(value: "Tagore ", child: Text("Tagore")),
+  DropdownMenuItem(value: "D.J. ", child: Text("D.J.")),
+  DropdownMenuItem(value: "I.H-B ", child: Text("I.H-B")),
+  DropdownMenuItem(value: "I.H-A ", child: Text("I.H-A")),
+  DropdownMenuItem(value: "S.V.B.H", child: Text("S.V.B.H")),
+  DropdownMenuItem(value: "K.N.G.H", child: Text("K.N.G.H")),
 ];

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:querium/models/user.dart' as model;
+import 'package:querium/providers/user_provider.dart';
 
 class AuthMethods {
   //Instance of firebase authentication
@@ -74,6 +76,20 @@ class AuthMethods {
     } catch (err) {
       res = err.toString();
     }
+    return res;
+  }
+
+  Future<String> changeState(
+      String key, String value, Map<String, dynamic> userMap) async {
+    String res = "Some Error Occured";
+    try {
+      userMap[key] = value;
+      await _firestore.collection('users').doc(userMap['uid']).set(userMap);
+      res = "Update Success";
+    } catch (err) {
+      res = err.toString();
+    }
+    print(res);
     return res;
   }
 }
