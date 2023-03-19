@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/views/admin/signup_view_admin.dart';
 import 'package:querium/views/widgets/button_global.dart';
 
+import '../../providers/admin_provider.dart';
 import '../../resources/auth_methods.dart';
 import '../../utils/utils.dart';
-import '../user/nav_bar.dart';
+import 'admin_navbar.dart';
 
 class LoginViewAdmin extends StatefulWidget {
   const LoginViewAdmin({super.key});
@@ -41,6 +43,8 @@ class _LoginViewAdminState extends State<LoginViewAdmin> {
       email: email!,
       password: password!,
     );
+    AdminProvider userProvider = Provider.of(context, listen: false);
+    await userProvider.refreshAdmin();
     setState(() {
       isLoading = false;
     });
@@ -48,13 +52,14 @@ class _LoginViewAdminState extends State<LoginViewAdmin> {
       // ignore: use_build_context_synchronously
       showSnackBar(context, res);
     } else {
+      print("go to feed");
       // ignore: use_build_context_synchronously
-      Navigator.pop(context, '/onBoard');
+      //Navigator.pop(context, '/onBoard');
 
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const NavBar()),
+        MaterialPageRoute(builder: (context) => const AdminNavBar()),
       );
     }
   }

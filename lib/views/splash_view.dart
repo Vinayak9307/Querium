@@ -6,6 +6,8 @@ import 'package:querium/utils/global_colors.dart';
 import 'package:querium/views/onboarding.dart';
 import 'package:querium/views/user/nav_bar.dart';
 
+import 'admin/admin_navbar.dart';
+
 // ignore: camel_case_types
 class splashView extends StatefulWidget {
   const splashView({super.key});
@@ -24,7 +26,7 @@ class _splashViewState extends State<splashView> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
-            return const NavBar();
+            return const AdminNavBar();
           } else if (snapshot.hasError) {
             return Center(
               child: Text('${snapshot.error}'),

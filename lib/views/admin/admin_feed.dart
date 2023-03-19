@@ -1,23 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:querium/providers/admin_provider.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/utils/post_card.dart';
 import 'package:querium/views/user/drawer.dart';
 import 'package:querium/providers/user_provider.dart';
-import 'package:querium/views/user/query_images.dart';
 
+import '../../models/admin.dart';
 
-
-class StudentHomeScreen extends StatefulWidget {
-  const StudentHomeScreen({super.key});
+class AdminFeedView extends StatefulWidget {
+  const AdminFeedView({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _StudentHomeScreenState createState() => _StudentHomeScreenState();
+  _AdminFeedViewState createState() => _AdminFeedViewState();
 }
 
-class _StudentHomeScreenState extends State<StudentHomeScreen> {
+class _AdminFeedViewState extends State<AdminFeedView> {
   @override
   void initState() {
     super.initState();
@@ -27,8 +27,8 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
   //This method uses the user provider to load the user data
   //when the user comes to the home screen
   loadUserData() async {
-    UserProvider userProvider = Provider.of(context, listen: false);
-    await userProvider.refreshUser();
+    AdminProvider userProvider = Provider.of(context, listen: false);
+    await userProvider.refreshAdmin();
   }
 
   final List post = [
@@ -43,6 +43,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Admin admin = Provider.of<AdminProvider>(context).getAdmin;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GlobalColor.mainColor,
@@ -59,12 +60,18 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
         stream: FirebaseFirestore.instance.collection('complaints').snapshots(),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if(snapshot.connectionState == ConnectionState.waiting){
+                  return const Center(child:CircularProgressIndicator());
+                }
           return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
+                
+                if(snapshot.data!.docs[index].data()['category'] == admin.category){
                 return PostCardView(
                   snap: snapshot.data!.docs[index].data(),
                 );
+                }
               });
               },
             ),
