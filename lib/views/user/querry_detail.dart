@@ -31,7 +31,11 @@ class _QueryDetailState extends State<QueryDetail> {
         backgroundColor: GlobalColor.mainColor,
         title: const Text('Query Detail',
             textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.w600)),
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
+            )
+        ),
         centerTitle: true,
         automaticallyImplyLeading: true,
       ),

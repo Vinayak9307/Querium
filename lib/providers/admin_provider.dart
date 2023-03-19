@@ -8,7 +8,7 @@ import '../models/admin.dart';
 class AdminProvider with ChangeNotifier {
   Admin? _admin;
 
-  Admin get getUser => _admin!;
+  Admin get getAdmin => _admin!;
 
   Future<void> refreshAdmin() async {
     Admin admin = await AuthMethods().getAdminDetails();
