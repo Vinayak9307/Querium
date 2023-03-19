@@ -3,11 +3,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:querium/utils/global_colors.dart';
-import 'package:querium/views/about_page_view.dart';
-import 'package:querium/views/file_complaint.dart';
 import 'package:querium/views/onboarding.dart';
-
-import 'nav_bar.dart';
+import 'package:querium/views/user/nav_bar.dart';
 
 // ignore: camel_case_types
 class splashView extends StatefulWidget {

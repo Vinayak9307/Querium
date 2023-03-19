@@ -4,7 +4,7 @@ import 'package:querium/views/widgets/button_global.dart';
 import 'package:querium/views/widgets/text_field_global.dart';
 import 'package:querium/resources/auth_methods.dart';
 
-import '../utils/utils.dart';
+import '../../utils/utils.dart';
 import 'login_view.dart';
 
 class SignUpView extends StatefulWidget {

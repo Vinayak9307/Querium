@@ -1,21 +1,17 @@
-// ignore_for_file: non_constant_identifier_names, override_on_non_overriding_member
-
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:querium/views/drawer.dart';
-import 'package:querium/views/pending_complaints.dart';
+import 'package:querium/views/user/drawer.dart';
+import 'package:querium/views/user/pending_complaints.dart';
 import 'package:querium/utils/global_colors.dart';
-
-import '../models/user.dart' as model;
-import '../providers/user_provider.dart';
-import '../resources/auth_methods.dart';
-import '../resources/storage_methods.dart';
-import '../utils/drop_down_items.dart';
-import '../utils/utils.dart';
+import '../../providers/user_provider.dart';
+import '../../resources/auth_methods.dart';
+import '../../resources/storage_methods.dart';
+import '../../utils/drop_down_items.dart';
+import '../../models/user.dart' as model;
+import '../../utils/utils.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -103,10 +99,11 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       //appbar
       appBar: AppBar(
-        backgroundColor: GlobalColor.mainColor,        
-        title: const Text('Profile',textAlign: TextAlign.center, style:TextStyle(fontWeight: FontWeight.w600) ),
+        backgroundColor: GlobalColor.mainColor,
+        title: const Text('Profile',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.w600)),
         centerTitle: true,
-        
       ),
 
       body: SingleChildScrollView(
@@ -243,9 +240,9 @@ class _ProfileState extends State<Profile> {
       drawer: Drawer(
         child: SingleChildScrollView(
           child: Container(
-            child:Column(
+            child: Column(
               children: const [
-                MyDrawer(), 
+                MyDrawer(),
               ],
             ),
           ),
