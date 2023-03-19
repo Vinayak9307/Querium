@@ -13,6 +13,7 @@ class Complaint {
   String category;
   String description;
   List<String> images = [];
+  List<String> comments = [];
   DateTime filingTime;
   int upvotes;
   String status;
@@ -32,6 +33,7 @@ class Complaint {
     required this.name,
     required this.status,
     required this.upvotes,
+    required this.comments,
   });
 
   //This function returns a map of data related to the user object
@@ -50,6 +52,7 @@ class Complaint {
         'name': name,
         'status': status,
         'upvotes': upvotes,
+        'comments': comments,
       };
 
   //This method returns a user instance based on the document snapshot given by firebase authentication
@@ -71,6 +74,7 @@ class Complaint {
       name: map['name'],
       status: map['status'],
       upvotes: map['upvotes'],
+      comments: map['comments'],
     );
   }
 }

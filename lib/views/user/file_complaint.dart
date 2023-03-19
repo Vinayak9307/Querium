@@ -62,7 +62,8 @@ class _FileComplaintState extends State<FileComplaint> {
           images: [],
           name: user!.getData()['username'],
           status: ComplaintStatus.pending.name,
-          upvotes: 0),
+          upvotes: 0,
+          comments: []),
       images: _imgList,
     );
     print(res);

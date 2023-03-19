@@ -27,6 +27,7 @@ class FirestoreMethods {
     var filingTime = compMap['filingTime'];
     int upvotes = compMap['upvotes'];
     var status = compMap['status'];
+    var comments = compMap['comments'];
 
     try {
       for (int i = 0; i < images.length; i++) {
@@ -35,20 +36,22 @@ class FirestoreMethods {
       }
 
       Complaint complaint = Complaint(
-          uid: uid,
-          compId: compId,
-          email: email,
-          regNo: regNo,
-          hostel: hostel,
-          roomNo: roomNo,
-          title: title,
-          category: category,
-          description: description,
-          filingTime: filingTime,
-          images: imgURL,
-          name: name,
-          status: status,
-          upvotes: upvotes);
+        uid: uid,
+        compId: compId,
+        email: email,
+        regNo: regNo,
+        hostel: hostel,
+        roomNo: roomNo,
+        title: title,
+        category: category,
+        description: description,
+        filingTime: filingTime,
+        images: imgURL,
+        name: name,
+        status: status,
+        upvotes: upvotes,
+        comments: comments,
+      );
 
       await _firestore
           .collection('complaints')

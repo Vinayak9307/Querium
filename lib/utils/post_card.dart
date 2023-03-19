@@ -17,9 +17,11 @@ class PostCardView extends StatelessWidget {
           child: InkWell(
         onTap: () {
           Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const QueryDetail()),
-    );
+            context,
+            MaterialPageRoute(
+              builder: (context) => QueryDetail(snap: snap),
+            ),
+          );
         },
         child: Container(
           padding: const EdgeInsets.all(12),

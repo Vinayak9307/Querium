@@ -150,4 +150,21 @@ class AuthMethods {
     print(res);
     return res;
   }
+
+  Future<String> changeComplaintState(
+      String key, String value, Map<String, dynamic> userMap) async {
+    String res = "Some Error Occured";
+    try {
+      userMap[key] = value;
+      await _firestore
+          .collection('complaints')
+          .doc(userMap['compId'])
+          .set(userMap);
+      res = "Update Success";
+    } catch (err) {
+      res = err.toString();
+    }
+    print(res);
+    return res;
+  }
 }

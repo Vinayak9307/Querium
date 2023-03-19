@@ -7,8 +7,6 @@ import 'package:querium/views/user/drawer.dart';
 import 'package:querium/providers/user_provider.dart';
 import 'package:querium/views/user/query_images.dart';
 
-
-
 class StudentHomeScreen extends StatefulWidget {
   const StudentHomeScreen({super.key});
 
@@ -31,16 +29,6 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
     await userProvider.refreshUser();
   }
 
-  final List post = [
-    'post 1',
-    'post 2',
-    'post 3',
-    'post 4',
-    'post 5',
-    //'post 6',
-    //'post 7',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +47,11 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
         stream: FirebaseFirestore.instance.collection('complaints').snapshots(),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
