@@ -6,8 +6,6 @@ import 'package:querium/utils/post_card.dart';
 import 'package:querium/views/user/drawer.dart';
 import 'package:querium/providers/user_provider.dart';
 
-import 'main_feed.dart';
-
 class StudentHomeScreen extends StatefulWidget {
   const StudentHomeScreen({super.key});
 
@@ -47,9 +45,9 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
         backgroundColor: GlobalColor.mainColor,
         title: const Text(
           'Feed',
-          textAlign: TextAlign.center,
+            textAlign: TextAlign.center,
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
-        ),
+            ),
         centerTitle: true,
         //automaticallyImplyLeading: false,
       ),
@@ -65,8 +63,8 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                   snap: snapshot.data!.docs[index].data(),
                 );
               });
-        },
-      ),
+              },
+            ),
       drawer: Drawer(
         child: SingleChildScrollView(
           child: Column(
