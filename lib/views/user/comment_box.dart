@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:querium/utils/global_colors.dart';
 
 class TestMe extends StatefulWidget {
+  const TestMe({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _TestMeState createState() => _TestMeState();
 }
 
