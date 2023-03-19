@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:querium/utils/global_colors.dart';
-import 'package:querium/views/signup_view.dart';
+import 'package:querium/views/user/signup_view.dart';
 import 'package:querium/views/widgets/button_global.dart';
 import 'package:querium/views/widgets/text_field_global.dart';
 
-import '../resources/auth_methods.dart';
-import '../utils/utils.dart';
+import '../../resources/auth_methods.dart';
+import '../../utils/utils.dart';
 import 'nav_bar.dart';
 
 class LoginView extends StatefulWidget {

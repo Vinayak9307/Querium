@@ -1,12 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:querium/views/profile.dart';
-import 'package:querium/views/student_home_screen.dart';
 import 'package:querium/views/about_page_view.dart';
-import 'package:querium/views/file_complaint.dart';
-import 'package:querium/views/home_page_view.dart';
+import 'package:querium/views/user/profile.dart';
+import 'package:querium/views/user/student_home_screen.dart';
 
-import '../utils/global_colors.dart';
+import '../../utils/global_colors.dart';
+import 'file_complaint.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});

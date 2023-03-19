@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:querium/views/user/login_view.dart';
 import 'package:querium/views/widgets/button_global.dart';
 import 'package:querium/utils/global_colors.dart';
-
-import 'login_view.dart';
-import 'login_view_admin.dart';
+import 'admin/login_view_admin.dart';
 
 class OnBoarding extends StatelessWidget {
   const OnBoarding({super.key});
@@ -58,8 +57,10 @@ class OnBoarding extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const LoginViewAdmin()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginView()),
+                  );
                 },
                 child: const ButtonGlobal(
                   text: "Administration",
