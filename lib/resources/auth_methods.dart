@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
 import 'package:querium/models/user.dart' as model;
-import 'package:querium/providers/user_provider.dart';
+
+import '../models/admin.dart';
 
 class AuthMethods {
   //Instance of firebase authentication
@@ -16,6 +16,15 @@ class AuthMethods {
         await _firestore.collection('users').doc(currentUser.uid).get();
 
     return model.User.getUser(snapshot);
+  }
+
+  Future<Admin> getAdminDetails() async {
+    User currentAdmin = _auth.currentUser!;
+
+    DocumentSnapshot snapshot =
+        await _firestore.collection('admins').doc(currentAdmin.uid).get();
+
+    return Admin.getAdmin(snapshot);
   }
 
   Future<String> signUpUser({
@@ -36,11 +45,60 @@ class AuthMethods {
         );
 
         await _firestore
-            .collection('users')
+            .collection('admins')
             .doc(cred.user!.uid)
             .set(user.getData());
       }
       res = "Sign Up Success";
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
+  Future<String> signUpAdmin({
+    required String email,
+    required String password,
+    required String username,
+    required String category,
+  }) async {
+    String res = "Some error occured";
+    try {
+      DocumentReference ref =
+          _firestore.collection('allowedAdmins').doc('allowedAdminsList');
+      DocumentSnapshot snap = await ref.get();
+
+      Map<String, dynamic> map = snap.data() as Map<String, dynamic>;
+      var authorisedAdmins = map['list'];
+
+      //This flag is used to check weather the admin is present in authorised admins or not
+      bool isPresent = false;
+      for (String s in authorisedAdmins) {
+        if (s == email) isPresent = true;
+      }
+      if (isPresent) {
+        if (email.isNotEmpty ||
+            password.isNotEmpty ||
+            username.isNotEmpty ||
+            category.isNotEmpty) {
+          UserCredential cred = await _auth.createUserWithEmailAndPassword(
+              email: email, password: password);
+
+          Admin admin = Admin(
+              username: username,
+              category: category,
+              email: email,
+              uid: cred.user!.uid);
+
+          await _firestore
+              .collection('admin')
+              .doc(cred.user!.uid)
+              .set(admin.getData());
+        }
+        res = "Sign Up Success";
+      } else {
+        res = "You are not authorised to Sign up";
+      }
     } catch (err) {
       res = err.toString();
     }
