@@ -5,7 +5,7 @@ import 'package:querium/utils/global_colors.dart';
 import 'package:querium/utils/post_card.dart';
 import 'package:querium/views/user/drawer.dart';
 import 'package:querium/providers/user_provider.dart';
-import 'package:querium/views/user/query_images.dart';
+
 
 
 
@@ -66,7 +66,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
                   snap: snapshot.data!.docs[index].data(),
                 );
               });
-        },
+          },
       ),
       drawer: Drawer(
         child: SingleChildScrollView(

@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:querium/providers/user_provider.dart';
 import 'package:querium/utils/global_colors.dart';
 
-import 'query_images.dart';
+import '../../models/user.dart';
+import '../../utils/post_card.dart';
 
 class PendingComplaints extends StatefulWidget {
   const PendingComplaints({super.key});
@@ -20,6 +24,8 @@ class _PendingComplaintsState extends State<PendingComplaints> {
   ];
   @override
   Widget build(BuildContext context) {
+        User user = Provider.of<UserProvider>(context).getUser;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GlobalColor.mainColor,
@@ -31,12 +37,25 @@ class _PendingComplaintsState extends State<PendingComplaints> {
         automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.white,
-      body: ListView.builder(
-        itemCount: pending_complaints.length,
-        itemBuilder: (context, index) {
-          return const Post();
-        },
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('complaints').snapshots(),
+        builder: (context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if(snapshot.connectionState == ConnectionState.waiting){
+                return const Center(child: CircularProgressIndicator(),);
+              }
+          return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                if(snapshot.data!.docs[index].data()['uid'] == user.uid && snapshot.data!.docs[index].data()['status'] == "pending"){
+                  return PostCardView(
+                    snap: snapshot.data!.docs[index].data(),
+                  );
+                }
+              });
+          },
       ),
     );
+    
   }
 }

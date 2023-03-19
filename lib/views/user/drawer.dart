@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:querium/resources/auth_methods.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/utils/utils.dart';
+import 'package:querium/views/about_page_view.dart';
 import 'package:querium/views/onboarding.dart';
 import 'package:querium/models/user.dart' as model;
 
@@ -108,7 +109,12 @@ class _MyDrawerState extends State<MyDrawer> {
             'About us',
             style: TextStyle(fontSize: 20),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AboutPageView()),
+            );
+          },
         ),
         ListTile(
           leading: const Icon(
