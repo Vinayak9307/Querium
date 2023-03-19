@@ -2,15 +2,14 @@ import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:querium/utils/global_colors.dart';
 
-class TestMe extends StatefulWidget {
-  const TestMe({super.key});
+class QueryComments extends StatefulWidget {
+  const QueryComments({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _TestMeState createState() => _TestMeState();
+  _QueryCommentsState createState() => _QueryCommentsState();
 }
 
-class _TestMeState extends State<TestMe> {
+class _QueryCommentsState extends State<QueryComments> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController commentController = TextEditingController();
   List filedata = [
@@ -62,7 +61,9 @@ class _TestMeState extends State<TestMe> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Comment Page"),
+        centerTitle: true,
         backgroundColor:GlobalColor.mainColor,
+        
       ),
       body: Container(
         child: CommentBox(

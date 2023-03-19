@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:querium/utils/global_colors.dart';
+import 'package:querium/views/user/querry_detail.dart';
 
 class PostCardView extends StatelessWidget {
   const PostCardView({super.key, required this.snap});
@@ -15,7 +16,10 @@ class PostCardView extends StatelessWidget {
       child: SizedBox(
           child: InkWell(
         onTap: () {
-          print("card tapped.");
+          Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const QueryDetail()),
+    );
         },
         child: Container(
           padding: const EdgeInsets.all(12),
