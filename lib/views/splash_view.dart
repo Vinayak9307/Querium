@@ -22,9 +22,17 @@ class splashView extends StatefulWidget {
 // ignore: camel_case_types
 class _splashViewState extends State<splashView> {
   @override
-  void initState() {
+  void initState() async {
     super.initState();
-    Widget next = FirebaseAuth.instance.currentUser == null ? const OnBoarding() : const NavBar();
+    final user = FirebaseAuth.instance.currentUser == null
+        ? null
+        : await FirebaseFirestore.instance
+            .collection('type')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .get();
+    Widget next = FirebaseAuth.instance.currentUser == null
+        ? const OnBoarding()
+        : user!.data()!['type'] == "user" ? const NavBar() : const AdminNavBar();
     Timer(
       const Duration(seconds: 3),
       () => Navigator.pushReplacement(

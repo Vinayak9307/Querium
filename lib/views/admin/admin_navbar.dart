@@ -67,6 +67,7 @@ class _AdminNavBarState extends State<AdminNavBar> {
           Icon(Icons.home, color: Colors.white),
           Icon(Icons.person, color: Colors.white),
         ],
+        index: _selectedIndex,
       ),
     );
   }
