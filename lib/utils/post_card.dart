@@ -23,24 +23,24 @@ class PostCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: SizedBox(
           child: InkWell(
         onTap: () {
-          Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
             String uid = snap['uid'];
             try {
               FirebaseFirestore.instance.collection('admin').doc(uid).get();
-              return ComplaintDetail(snap: snap,);
+              return QueryDetail(
+                snap: snap,
+              );
             } catch (err) {
-              return QueryDetail(snap: snap,);
+              return QueryDetail(
+                snap: snap,
+              );
             }
-          } )
-        );
+          }));
         },
         child: Container(
           padding: const EdgeInsets.all(12),
@@ -191,20 +191,19 @@ class PostCardView extends StatelessWidget {
                       onPressed: () {
                         List<dynamic> up = snap['upvotes'];
                         bool flag = true;
-                        for(var i in up){
-                          if(i == snap['uid']){
+                        for (var i in up) {
+                          if (i == snap['uid']) {
                             flag = false;
                           }
                         }
-                        if(flag){
-                        up.add(snap['uid']);
-                        print(snap['uid']);
-                        AuthMethods().changeComplaintState("upvotes",up ,snap);
+                        if (flag) {
+                          up.add(snap['uid']);
+                          print(snap['uid']);
+                          AuthMethods()
+                              .changeComplaintState("upvotes", up, snap);
                         }
                         pressed = true;
                       },
-                      
-                      
                       style: ElevatedButton.styleFrom(
                           backgroundColor: GlobalColor.mainColor,
                           shape: RoundedRectangleBorder(

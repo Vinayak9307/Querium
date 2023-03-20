@@ -25,7 +25,7 @@ class FirestoreMethods {
     var description = compMap['description'];
     List<String> imgURL = [];
     var filingTime = compMap['filingTime'];
-    int upvotes = compMap['upvotes'];
+    var upvotes = compMap['upvotes'];
     var status = compMap['status'];
     var comments = compMap['comments'];
 

@@ -30,7 +30,7 @@ class _splashViewState extends State<splashView> {
             String uid = snapshot.data!.uid;
             try {
               FirebaseFirestore.instance.collection('admin').doc(uid).get();
-              return const AdminNavBar();
+              return const NavBar();
             } catch (err) {
               return const NavBar();
             }
