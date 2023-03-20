@@ -58,18 +58,8 @@ class _AdminFeedViewState extends State<AdminFeedView> {
           return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                print(snapshot.data!.docs[index].data()['category']);
                 if (snapshot.data!.docs[index].data()['category'] ==
-                    admin.category) {
-                  // if (index == 2) {
-                  //   colIndex++;
-                  //   return Column(
-                  //     children: [
-                  //       const SizedBox(height: 10),
-                  //       PostCardView(snap: snapshot.data!.docs[index].data()),
-                  //     ],
-                  //   );
-                  // }
+                    admin.category && snapshot.data!.docs[index].data()['level'] == admin.level ) {
                   return PostCardView(
                     snap: snapshot.data!.docs[index].data(),
                     user: admin,

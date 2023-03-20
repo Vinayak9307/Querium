@@ -22,6 +22,7 @@ class _SignUpViewAdminState extends State<SignUpViewAdmin> {
   String? password = "";
   String? confirmPassword = "";
   String? category = "";
+  String? level = "";
 
   final formKey = GlobalKey<FormState>();
 
@@ -36,6 +37,7 @@ class _SignUpViewAdminState extends State<SignUpViewAdmin> {
       password: password!,
       username: username!,
       category: category!,
+      level: level!,
     );
     setState(() {
       isLoading = false;
@@ -371,6 +373,50 @@ class _SignUpViewAdminState extends State<SignUpViewAdmin> {
                   ),
                   const SizedBox(
                     height: 20,
+                  ),
+                  DropdownButtonFormField<String>(
+                    items: tierChoice,
+                    menuMaxHeight: 200,
+                    elevation: 0,
+                    decoration: InputDecoration(
+                      hintText: "Select level",
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 159, 158, 158),
+                          width: 1.1,
+                        ),
+                      ),
+                    ),
+                    //width: MediaQuery.of(context).size.width*0.91,
+                    validator: (value) =>
+                        value == null ? "Please select a category" : null,
+                    onChanged: (value) {
+                      setState(() {
+                        level = value;
+                      });
+                    },
                   ),
                   const SizedBox(
                     height: 50,

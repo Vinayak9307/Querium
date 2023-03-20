@@ -48,35 +48,41 @@ class _FileComplaintState extends State<FileComplaint> {
     });
     String res = "Some Error Occured";
 
-    if(user!.hostel!.isNotEmpty && user!.roomNo!.isNotEmpty){
-      
+    if (user!.hostel!.isNotEmpty && user!.roomNo!.isNotEmpty) {
       String compId = const Uuid().v1();
 
       res = await FirestoreMethods().uploadComplaint(
         complaint: Complaint(
-            uid: user!.getData()['uid'],
-            compId: compId,
-            email: user!.getData()['email'],
-            regNo: user!.getData()['regNo'],
-            hostel: user!.getData()['hostel'],
-            roomNo: user!.getData()['roomNo'],
-            title: title!,
-            category: selectedCategory!,
-            description: description!,
-            filingTime: DateTime.now(),
-            images: [],
-            name: user!.getData()['username'],
-            status: ComplaintStatus.pending.name,
-            upvotes: [],
-            comments: []),
+          uid: user!.getData()['uid'],
+          compId: compId,
+          email: user!.getData()['email'],
+          regNo: user!.getData()['regNo'],
+          hostel: user!.getData()['hostel'],
+          roomNo: user!.getData()['roomNo'],
+          title: title!,
+          category: selectedCategory!,
+          description: description!,
+          filingTime: DateTime.now(),
+          images: [],
+          name: user!.getData()['username'],
+          status: ComplaintStatus.pending.name,
+          upvotes: [],
+          comments: [],
+          adminRes: "",
+          level: "tier3"
+        ),
         images: _imgList,
       );
-      await AuthMethods().changeState("complaintFiled", (int.parse(user!.getData()['complaintFiled']) + 1).toString(), user!.getData());
+      await AuthMethods().changeState(
+          "complaintFiled",
+          (int.parse(user!.getData()['complaintFiled']) + 1).toString(),
+          user!.getData());
       // ignore: use_build_context_synchronously
       UserProvider userProvider = Provider.of(context, listen: false);
-    await userProvider.refreshUser();
-    }else{
-      showSnackBar(context, "Please fill the hostel and room no details in profile section !");
+      await userProvider.refreshUser();
+    } else {
+      showSnackBar(context,
+          "Please fill the hostel and room no details in profile section !");
     }
 
     print(res);

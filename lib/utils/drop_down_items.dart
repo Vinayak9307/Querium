@@ -56,3 +56,8 @@ List<DropdownMenuItem<String>>? hostelChoice = const [
   DropdownMenuItem(value: "S.V.B.H", child: Text("S.V.B.H")),
   DropdownMenuItem(value: "K.N.G.H", child: Text("K.N.G.H")),
 ];
+List<DropdownMenuItem<String>>? tierChoice = const [
+  DropdownMenuItem(value: "tier1 ", child: Text("Tier 1")),
+  DropdownMenuItem(value: "tier2 ", child: Text("Tier 2")),
+  DropdownMenuItem(value: "tier3", child: Text("Tier 3")),
+];

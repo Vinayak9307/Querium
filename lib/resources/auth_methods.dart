@@ -37,7 +37,10 @@ class AuthMethods {
   }) async {
     String res = "Some error occured";
     try {
-      if (email.isNotEmpty || password.isNotEmpty || username.isNotEmpty || regNo.isNotEmpty) {
+      if (email.isNotEmpty ||
+          password.isNotEmpty ||
+          username.isNotEmpty ||
+          regNo.isNotEmpty) {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
 
@@ -69,6 +72,7 @@ class AuthMethods {
     required String password,
     required String username,
     required String category,
+    required String level,
   }) async {
     String res = "Some error occured";
     try {
@@ -88,7 +92,8 @@ class AuthMethods {
         if (email.isNotEmpty ||
             password.isNotEmpty ||
             username.isNotEmpty ||
-            category.isNotEmpty) {
+            category.isNotEmpty ||
+            level.isNotEmpty) {
           UserCredential cred = await _auth.createUserWithEmailAndPassword(
               email: email, password: password);
 
@@ -96,7 +101,8 @@ class AuthMethods {
               username: username,
               category: category,
               email: email,
-              uid: cred.user!.uid);
+              uid: cred.user!.uid,
+              level: level);
 
           await _firestore
               .collection('admin')
@@ -158,6 +164,7 @@ class AuthMethods {
     print(res);
     return res;
   }
+
   Future<String> changeAdminState(
       String key, String value, Map<String, dynamic> userMap) async {
     String res = "Some Error Occured";
@@ -168,7 +175,7 @@ class AuthMethods {
     } catch (err) {
       res = err.toString();
     }
-    
+
     print(res);
     return res;
   }

@@ -17,6 +17,8 @@ class Complaint {
   DateTime filingTime;
   List <String> upvotes;
   String status;
+  String adminRes;
+  String level;
 
   Complaint({
     required this.uid,
@@ -34,6 +36,8 @@ class Complaint {
     required this.status,
     required this.upvotes,
     required this.comments,
+    required this.adminRes,
+    required this.level,
   });
 
   //This function returns a map of data related to the user object
@@ -53,6 +57,8 @@ class Complaint {
         'status': status,
         'upvotes': upvotes,
         'comments': comments,
+        'adminRes':adminRes,
+        'level':level,
       };
 
   //This method returns a user instance based on the document snapshot given by firebase authentication
@@ -75,6 +81,8 @@ class Complaint {
       status: map['status'],
       upvotes: map['upvotes'],
       comments: map['comments'],
+      adminRes: map['adminRes'],
+      level: map['level'],
     );
   }
 }
