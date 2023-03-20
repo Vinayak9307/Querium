@@ -43,8 +43,6 @@ class _LoginViewAdminState extends State<LoginViewAdmin> {
       email: email!,
       password: password!,
     );
-    AdminProvider userProvider = Provider.of(context, listen: false);
-    await userProvider.refreshAdmin();
     setState(() {
       isLoading = false;
     });

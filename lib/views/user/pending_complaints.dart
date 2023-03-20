@@ -50,6 +50,7 @@ class _PendingComplaintsState extends State<PendingComplaints> {
                 if(snapshot.data!.docs[index].data()['uid'] == user.uid && snapshot.data!.docs[index].data()['status'] == "pending"){
                   return PostCardView(
                     snap: snapshot.data!.docs[index].data(),
+                    user: user.uid,
                   );
                 }
               });
