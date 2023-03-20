@@ -72,6 +72,7 @@ class _AdminFeedViewState extends State<AdminFeedView> {
                   // }
                   return PostCardView(
                     snap: snapshot.data!.docs[index].data(),
+                    user: admin,
                   );
                 } else {
                   return Container();

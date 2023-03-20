@@ -4,21 +4,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:querium/models/user.dart' as model;
-import 'package:querium/providers/user_provider.dart';
 import 'package:querium/resources/auth_methods.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/views/user/querry_detail.dart';
 
 import '../models/admin.dart';
-import '../providers/admin_provider.dart';
-import '../views/admin/admin_navbar.dart';
 import '../views/admin/complaint_detail.dart';
 
 class PostCardView extends StatelessWidget {
-  const PostCardView({super.key, required this.snap});
+  const PostCardView({super.key, required this.snap, required this.user});
   final snap;
+  final user;
   static bool pressed = false;
 
   @override
@@ -29,17 +25,24 @@ class PostCardView extends StatelessWidget {
           child: InkWell(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            String uid = snap['uid'];
-            try {
-              FirebaseFirestore.instance.collection('admin').doc(uid).get();
-              return QueryDetail(
+            if (user.runtimeType == Admin) {
+              return ComplaintDetail(
                 snap: snap,
               );
-            } catch (err) {
+            } else {
               return QueryDetail(
                 snap: snap,
               );
             }
+            // try {
+            //   FirebaseFirestore.instance.collection('admin').doc(uid).get();
+            //
+
+            // } catch (err) {
+            // }
+            return QueryDetail(
+              snap: snap,
+            );
           }));
         },
         child: Container(
@@ -157,18 +160,18 @@ class PostCardView extends StatelessWidget {
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
+                      children: [
                         Text(
-                          "Pending",
+                          snap['status'],
                           textAlign: TextAlign.start,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                             color: Color.fromARGB(255, 78, 76, 76),
                             fontWeight: FontWeight.w700,
                           ),
                         ),
                         //SizedBox(height: MediaQuery.of(context).size.height*0.015,),
-                        Text(
+                        const Text(
                           "Status",
                           textAlign: TextAlign.start,
                           style: TextStyle(
@@ -192,10 +195,11 @@ class PostCardView extends StatelessWidget {
                         List<dynamic> up = snap['upvotes'];
                         bool flag = true;
                         for (var i in up) {
-                          if (i == snap['uid']) {
+                          if (user.uid == i) {
                             flag = false;
                           }
                         }
+                        print(user);
                         if (flag) {
                           up.add(snap['uid']);
                           print(snap['uid']);

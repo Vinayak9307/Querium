@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:querium/models/user.dart' as model;
+import 'package:querium/providers/user_provider.dart';
 
 import '../models/admin.dart';
 
@@ -166,6 +168,7 @@ class AuthMethods {
     } catch (err) {
       res = err.toString();
     }
+    
     print(res);
     return res;
   }
