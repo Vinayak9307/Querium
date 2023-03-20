@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/views/widgets/button_global.dart';
-import 'package:querium/views/widgets/text_field_global.dart';
 import 'package:querium/resources/auth_methods.dart';
 
 import '../../utils/utils.dart';
@@ -23,6 +22,7 @@ class _SignUpViewState extends State<SignUpView> {
 
   String? email = "";
   String? username = "";
+  String? regNo = "";
   String? password = "";
   String? confirmPassword = "";
 
@@ -45,6 +45,7 @@ class _SignUpViewState extends State<SignUpView> {
       email: email!,
       password: password!,
       username: username!,
+      regNo: regNo!,
     );
     setState(() {
       isLoading = false;
@@ -178,7 +179,7 @@ class _SignUpViewState extends State<SignUpView> {
                   },
                   onChanged: (value) {
                     setState(() {
-                      username = value;
+                      regNo = value;
                     });
                   },
                   decoration: InputDecoration(

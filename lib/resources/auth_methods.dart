@@ -31,10 +31,11 @@ class AuthMethods {
     required String email,
     required String password,
     required String username,
+    required String regNo,
   }) async {
     String res = "Some error occured";
     try {
-      if (email.isNotEmpty || password.isNotEmpty || username.isNotEmpty) {
+      if (email.isNotEmpty || password.isNotEmpty || username.isNotEmpty || regNo.isNotEmpty) {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
 
@@ -42,10 +43,15 @@ class AuthMethods {
           username: username,
           email: email,
           uid: cred.user!.uid,
+          regNo: regNo,
+          hostel: "",
+          roomNo: "",
+          complaintFiled: "0",
+          solvedComplaints: "0",
         );
 
         await _firestore
-            .collection('admins')
+            .collection('users')
             .doc(cred.user!.uid)
             .set(user.getData());
       }
@@ -150,9 +156,22 @@ class AuthMethods {
     print(res);
     return res;
   }
+  Future<String> changeAdminState(
+      String key, String value, Map<String, dynamic> userMap) async {
+    String res = "Some Error Occured";
+    try {
+      userMap[key] = value;
+      await _firestore.collection('admin').doc(userMap['uid']).set(userMap);
+      res = "Update Success";
+    } catch (err) {
+      res = err.toString();
+    }
+    print(res);
+    return res;
+  }
 
   Future<String> changeComplaintState(
-      String key, String value, Map<String, dynamic> userMap) async {
+      String key, dynamic value, Map<String, dynamic> userMap) async {
     String res = "Some Error Occured";
     try {
       userMap[key] = value;

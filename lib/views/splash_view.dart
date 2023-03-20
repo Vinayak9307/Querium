@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:querium/utils/global_colors.dart';
@@ -26,7 +27,13 @@ class _splashViewState extends State<splashView> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
-            return const NavBar();
+            String uid = snapshot.data!.uid;
+            try {
+              FirebaseFirestore.instance.collection('admin').doc(uid).get();
+              return const AdminNavBar();
+            } catch (err) {
+              return const NavBar();
+            }
           } else if (snapshot.hasError) {
             return Center(
               child: Text('${snapshot.error}'),

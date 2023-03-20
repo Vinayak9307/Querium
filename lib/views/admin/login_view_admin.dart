@@ -53,8 +53,8 @@ class _LoginViewAdminState extends State<LoginViewAdmin> {
       showSnackBar(context, res);
     } else {
       print("go to feed");
-      // ignore: use_build_context_synchronously
-      //Navigator.pop(context, '/onBoard');
+      //ignore: use_build_context_synchronously
+      Navigator.pop(context, '/onBoard');
 
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(

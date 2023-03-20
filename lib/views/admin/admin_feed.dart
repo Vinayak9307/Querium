@@ -5,9 +5,9 @@ import 'package:querium/providers/admin_provider.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/utils/post_card.dart';
 import 'package:querium/views/user/drawer.dart';
-import 'package:querium/providers/user_provider.dart';
 
 import '../../models/admin.dart';
+import 'admin_drawer.dart';
 
 class AdminFeedView extends StatefulWidget {
   const AdminFeedView({super.key});
@@ -18,6 +18,8 @@ class AdminFeedView extends StatefulWidget {
 }
 
 class _AdminFeedViewState extends State<AdminFeedView> {
+
+  int colIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -31,16 +33,6 @@ class _AdminFeedViewState extends State<AdminFeedView> {
     await userProvider.refreshAdmin();
   }
 
-  final List post = [
-    'post 1',
-    'post 2',
-    'post 3',
-    'post 4',
-    'post 5',
-    //'post 6',
-    //'post 7',
-  ];
-
   @override
   Widget build(BuildContext context) {
     Admin admin = Provider.of<AdminProvider>(context).getAdmin;
@@ -49,9 +41,9 @@ class _AdminFeedViewState extends State<AdminFeedView> {
         backgroundColor: GlobalColor.mainColor,
         title: const Text(
           'Feed',
-            textAlign: TextAlign.center,
+          textAlign: TextAlign.center,
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
-            ),
+        ),
         centerTitle: true,
         //automaticallyImplyLeading: false,
       ),
@@ -60,26 +52,38 @@ class _AdminFeedViewState extends State<AdminFeedView> {
         stream: FirebaseFirestore.instance.collection('complaints').snapshots(),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-              if(snapshot.connectionState == ConnectionState.waiting){
-                  return const Center(child:CircularProgressIndicator());
-                }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
           return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                
-                if(snapshot.data!.docs[index].data()['category'] == admin.category){
-                return PostCardView(
-                  snap: snapshot.data!.docs[index].data(),
-                );
+                print(snapshot.data!.docs[index].data()['category']);
+                if (snapshot.data!.docs[index].data()['category'] ==
+                    admin.category) {
+                  // if (index == 2) {
+                  //   colIndex++;
+                  //   return Column(
+                  //     children: [
+                  //       const SizedBox(height: 10),
+                  //       PostCardView(snap: snapshot.data!.docs[index].data()),
+                  //     ],
+                  //   );
+                  // }
+                  return PostCardView(
+                    snap: snapshot.data!.docs[index].data(),
+                  );
+                } else {
+                  return Container();
                 }
               });
-              },
-            ),
+        },
+      ),
       drawer: Drawer(
         child: SingleChildScrollView(
           child: Column(
             children: const [
-              MyDrawer(),
+              AdminDrawer(),
             ],
           ),
         ),

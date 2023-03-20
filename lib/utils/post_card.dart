@@ -1,27 +1,46 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:querium/models/user.dart' as model;
+import 'package:querium/providers/user_provider.dart';
+import 'package:querium/resources/auth_methods.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/views/user/querry_detail.dart';
+
+import '../models/admin.dart';
+import '../providers/admin_provider.dart';
+import '../views/admin/admin_navbar.dart';
+import '../views/admin/complaint_detail.dart';
 
 class PostCardView extends StatelessWidget {
   const PostCardView({super.key, required this.snap});
   final snap;
+  static bool pressed = false;
 
   @override
   Widget build(BuildContext context) {
+    
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: SizedBox(
           child: InkWell(
         onTap: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => QueryDetail(snap: snap),
-            ),
-          );
+          context,
+          MaterialPageRoute(builder: (context) {
+            String uid = snap['uid'];
+            try {
+              FirebaseFirestore.instance.collection('admin').doc(uid).get();
+              return ComplaintDetail(snap: snap,);
+            } catch (err) {
+              return QueryDetail(snap: snap,);
+            }
+          } )
+        );
         },
         child: Container(
           padding: const EdgeInsets.all(12),
@@ -170,10 +189,22 @@ class PostCardView extends StatelessWidget {
                     //color: Colors.orange,
                     child: ElevatedButton(
                       onPressed: () {
-                        // setState(() {
-                        //   _voteCount++;
-                        // });
+                        List<dynamic> up = snap['upvotes'];
+                        bool flag = true;
+                        for(var i in up){
+                          if(i == snap['uid']){
+                            flag = false;
+                          }
+                        }
+                        if(flag){
+                        up.add(snap['uid']);
+                        print(snap['uid']);
+                        AuthMethods().changeComplaintState("upvotes",up ,snap);
+                        }
+                        pressed = true;
                       },
+                      
+                      
                       style: ElevatedButton.styleFrom(
                           backgroundColor: GlobalColor.mainColor,
                           shape: RoundedRectangleBorder(
@@ -183,7 +214,7 @@ class PostCardView extends StatelessWidget {
                         children: [
                           const Icon(Icons.arrow_upward),
                           Text(
-                            snap['upvotes'].toString() + " Upvote",
+                            snap['upvotes'].length.toString() + " Upvote",
                           )
                         ],
                       ),

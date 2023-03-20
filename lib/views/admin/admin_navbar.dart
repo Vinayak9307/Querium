@@ -15,7 +15,7 @@ class AdminNavBar extends StatefulWidget {
 class _AdminNavBarState extends State<AdminNavBar> {
   int _selectedIndex = 0;
   final Widget _adminFeedView = const AdminFeedView();
-  // final Widget _adminProfile = const AdminProfile();
+  final Widget _adminProfile = const AdminProfile();
   bool isLoading = true;
 
   List<Widget>? screens;
@@ -26,7 +26,7 @@ class _AdminNavBarState extends State<AdminNavBar> {
     setState(() {
       screens = [
         _adminFeedView,
-        // _adminProfile,
+        _adminProfile,
       ];
       loadUserData();
     });

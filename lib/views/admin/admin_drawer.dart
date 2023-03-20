@@ -7,18 +7,20 @@ import 'package:querium/views/about_page_view.dart';
 import 'package:querium/views/onboarding.dart';
 import 'package:querium/models/user.dart' as model;
 
+import '../../models/admin.dart';
+import '../../providers/admin_provider.dart';
 import '../../providers/user_provider.dart';
 
-class MyDrawer extends StatefulWidget {
-  const MyDrawer({super.key});
+class AdminDrawer extends StatefulWidget {
+  const AdminDrawer({super.key});
 
   @override
-  State<MyDrawer> createState() => _MyDrawerState();
+  State<AdminDrawer> createState() => _AdminDrawerState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
+class _AdminDrawerState extends State<AdminDrawer> {
   String? name;
-  String? regNo;
+  String? category;
   String? email;
   String? profileURL;
 
@@ -40,12 +42,12 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   void initState() {
     super.initState();
-    model.User user = Provider.of<UserProvider>(context, listen: false).getUser;
-    Map<String, dynamic> userMap = user.getData();
+    Admin admin = Provider.of<AdminProvider>(context, listen: false).getAdmin;
+    Map<String, dynamic> userMap = admin.getData();
     name = userMap['username'];
-    regNo = userMap['regNo'];
-    email = userMap['email'];
     profileURL = userMap['profileURL'];
+    email = userMap['email'];
+    category = userMap['category'];
   }
 
   @override
@@ -97,7 +99,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 height: 5,
               ),
               Text(
-                regNo!,
+                category!,
                 style: const TextStyle(color: Colors.white, fontSize: 15),
               ),
               const SizedBox(
