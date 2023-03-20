@@ -37,7 +37,7 @@ class _notificationViewState extends State<notificationView> {
           decoration: BoxDecoration(
               color: Color.fromARGB(255, 211, 223, 243),
               borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
+              boxShadow: [
                 // BoxShadow(
                 //   //color: Color.fromARGB(255, 211, 223, 243),
                 //   offset: Offset(4.0, 4.0),
@@ -45,10 +45,8 @@ class _notificationViewState extends State<notificationView> {
                 //   spreadRadius: 0.5,
                 // ),
                 BoxShadow(
-                    color: Colors.black,
-                    offset: Offset(4.0, 4.0),
-                    blurRadius: 5,
-                    spreadRadius: 0.5),
+                    color: Colors.black.withOpacity(0.2),
+              blurRadius: 6,),
               ]),
           child: const ListTile(
               enabled: false,
@@ -88,7 +86,14 @@ class _notificationViewState extends State<notificationView> {
                   const SizedBox(
                     height: 13,
                   ),
-                  const Text('slide right to delete '),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('slide right to delete '),
+                      SizedBox(width: MediaQuery.of(context).size.width*0.02,),
+                      const Icon(Icons.swipe_right),
+                    ],
+                  ),
                   const SizedBox(
                     height: 9,
                   ),

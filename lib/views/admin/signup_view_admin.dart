@@ -169,6 +169,9 @@ class _SignUpViewAdminState extends State<SignUpViewAdmin> {
                       if (value!.isEmpty) {
                         return "Email can't be left empty.";
                       }
+                      else if(!RegExp(r'^[\w-\.]+@mnnit.ac.in$').hasMatch(value)){
+                        return "Invalid email.";
+                      }
                       return null;
                     },
                     onChanged: (value) {
