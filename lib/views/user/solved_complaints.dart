@@ -43,6 +43,7 @@ class _SolvedComplaintsState extends State<SolvedComplaints> {
                 if(snapshot.data!.docs[index].data()['uid'] == user.uid && snapshot.data!.docs[index].data()['status'] == "solved"){
                   return PostCardView(
                     snap: snapshot.data!.docs[index].data(),
+                    user: user.uid,
                   );
                 }
               });
