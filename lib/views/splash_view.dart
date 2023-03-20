@@ -24,7 +24,9 @@ class _splashViewState extends State<splashView> {
   @override
   void initState() {
     super.initState();
-    Widget next = FirebaseAuth.instance.currentUser == null ? const OnBoarding() : const NavBar();
+    Widget next = FirebaseAuth.instance.currentUser == null
+        ? const OnBoarding()
+        : const NavBar();
     Timer(
       const Duration(seconds: 3),
       () => Navigator.pushReplacement(

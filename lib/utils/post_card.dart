@@ -12,7 +12,7 @@ import '../models/admin.dart';
 import '../views/admin/complaint_detail.dart';
 
 class PostCardView extends StatelessWidget {
-  const PostCardView({super.key, required this.snap , required this.user});
+  const PostCardView({super.key, required this.snap, required this.user});
   final snap;
   final user;
   static bool pressed = false;
@@ -24,25 +24,26 @@ class PostCardView extends StatelessWidget {
       child: SizedBox(
           child: InkWell(
         onTap: () {
-          Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) {
-            if(user.runtimeType == Admin){
-              return ComplaintDetail(snap: snap,);
-            }else{
-              return QueryDetail(snap: snap,);
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            if (user.runtimeType == Admin) {
+              return ComplaintDetail(
+                snap: snap,
+              );
+            } else {
+              return QueryDetail(
+                snap: snap,
+              );
             }
             // try {
             //   FirebaseFirestore.instance.collection('admin').doc(uid).get();
-            //   
+            //
 
             // } catch (err) {
             // }
-              return QueryDetail(snap: snap,);
-
-
-          } )
-        );
+            return QueryDetail(
+              snap: snap,
+            );
+          }));
         },
         child: Container(
           padding: const EdgeInsets.all(12),
@@ -193,21 +194,20 @@ class PostCardView extends StatelessWidget {
                       onPressed: () {
                         List<dynamic> up = snap['upvotes'];
                         bool flag = true;
-                        for(var i in up){
-                          if(user.uid == i){
+                        for (var i in up) {
+                          if (user.uid == i) {
                             flag = false;
                           }
                         }
                         print(user);
-                        if(flag){
-                        up.add(snap['uid']);
-                        print(snap['uid']);
-                        AuthMethods().changeComplaintState("upvotes",up ,snap);
+                        if (flag) {
+                          up.add(snap['uid']);
+                          print(snap['uid']);
+                          AuthMethods()
+                              .changeComplaintState("upvotes", up, snap);
                         }
                         pressed = true;
                       },
-                      
-                      
                       style: ElevatedButton.styleFrom(
                           backgroundColor: GlobalColor.mainColor,
                           shape: RoundedRectangleBorder(
