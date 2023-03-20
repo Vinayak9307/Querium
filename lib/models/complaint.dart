@@ -15,7 +15,7 @@ class Complaint {
   List<String> images = [];
   List<String> comments = [];
   DateTime filingTime;
-  int upvotes;
+  List <String> upvotes;
   String status;
 
   Complaint({

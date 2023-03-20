@@ -5,6 +5,7 @@ import 'package:querium/utils/global_colors.dart';
 import 'package:querium/utils/post_card.dart';
 import 'package:querium/views/user/drawer.dart';
 import 'package:querium/providers/user_provider.dart';
+import 'package:querium/models/user.dart' as model;
 
 class StudentHomeScreen extends StatefulWidget {
   const StudentHomeScreen({super.key});
@@ -30,6 +31,8 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+   model.User user = Provider.of<UserProvider>(context).getUser;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GlobalColor.mainColor,
@@ -56,6 +59,7 @@ class _StudentHomeScreenState extends State<StudentHomeScreen> {
               itemBuilder: (context, index) {
                 return PostCardView(
                   snap: snapshot.data!.docs[index].data(),
+                  user: user,
                 );
               });
         },

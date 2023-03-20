@@ -99,21 +99,12 @@ class QueryDetail extends StatelessWidget {
               height: 20,
             ),
             for (var item in snap['images'])
-              Center(
-                child: Container(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
                   width: double.infinity,
-                  height: 200,
-                  child: Padding(
-                    padding: const EdgeInsets.all(13.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(item),
-                        ),
-                        //shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
+                  child: Image.network(item,fit: BoxFit.fill,),
+                  
                 ),
               ),
             const SizedBox(

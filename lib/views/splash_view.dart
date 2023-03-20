@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:querium/resources/firestore_methods.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/views/onboarding.dart';
 import 'package:querium/views/user/nav_bar.dart';
 
+import '../models/admin.dart';
 import 'admin/admin_navbar.dart';
 
 // ignore: camel_case_types
@@ -22,34 +24,7 @@ class _splashViewState extends State<splashView> {
   @override
   void initState() {
     super.initState();
-    Widget next = StreamBuilder(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.active) {
-          if (snapshot.hasData) {
-            String uid = snapshot.data!.uid;
-            try {
-              FirebaseFirestore.instance.collection('admin').doc(uid).get();
-              return const AdminNavBar();
-            } catch (err) {
-              return const NavBar();
-            }
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('${snapshot.error}'),
-            );
-          }
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.blue,
-            ),
-          );
-        }
-        return const OnBoarding();
-      },
-    );
+    Widget next = FirebaseAuth.instance.currentUser == null ? const OnBoarding() : const NavBar();
     Timer(
       const Duration(seconds: 3),
       () => Navigator.pushReplacement(
@@ -60,6 +35,16 @@ class _splashViewState extends State<splashView> {
       ),
     );
   }
+
+  // checkAdminOrUser(snapshot) async {
+  //   String uid = snapshot.data!.uid;
+  //   var doc =
+  //       await FirebaseFirestore.instance.collection('admin').doc(uid).get();
+  //   if (!doc.exists) {
+  //   } else {
+  //     return const NavBar();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -78,5 +63,9 @@ class _splashViewState extends State<splashView> {
         ),
       ),
     ));
+  }
+
+  void waitForLoad(uid) async {
+    await FirebaseFirestore.instance.collection('users').doc(uid).get();
   }
 }
