@@ -14,14 +14,19 @@ class notificationView extends StatefulWidget {
 
 // ignore: camel_case_types
 class _notificationViewState extends State<notificationView> {
-  final List noti = [
-    'post 1',
-    'post 2',
-    'post 3',
-    'post 4',
-    'post 5',
+  final List titlemsg= [
+    'Responded !!',
+    'Fowarded..',
+    'UpVote ',
+    
   ];
-  Widget tiles() {
+  final List message = [
+    'Admin responded to your problem.',
+    'Your problem has been forwarded by admin',
+    'Your problem received an upvote',
+    
+  ];
+  Widget tiles(index) {
     return Slidable(
       startActionPane: ActionPane(motion: const StretchMotion(), children: [
         SlidableAction(
@@ -38,22 +43,22 @@ class _notificationViewState extends State<notificationView> {
               color: Color.fromARGB(255, 211, 223, 243),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
-                
                 BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-              blurRadius: 6,),
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 6,
+                ),
               ]),
-          child: const ListTile(
+          child:ListTile(
               enabled: false,
 
               //tileColor: const Color.fromARGB(255, 211, 223, 243),
               title: Text(
-                'this is title',
+                titlemsg[index],
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                    const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               ),
-              subtitle: Text('this is discription',
-                  style: TextStyle(color: Colors.black))),
+              subtitle: Text(message[index],
+                  style: const TextStyle(color: Colors.black))),
         ),
       ),
     );
@@ -73,7 +78,7 @@ class _notificationViewState extends State<notificationView> {
         //automaticallyImplyLeading: false,
       ),
       body: ListView.builder(
-          itemCount: noti.length,
+          itemCount: titlemsg.length,
           itemBuilder: (context, index) {
             if (index == 0) {
               return Column(
@@ -85,18 +90,20 @@ class _notificationViewState extends State<notificationView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text('slide right to delete '),
-                      SizedBox(width: MediaQuery.of(context).size.width*0.02,),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.02,
+                      ),
                       const Icon(Icons.swipe_right),
                     ],
                   ),
                   const SizedBox(
                     height: 9,
                   ),
-                  tiles(),
+                  tiles(index),
                 ],
               );
             }
-            return tiles();
+            return tiles(index);
           }),
       drawer: Drawer(
         child: SingleChildScrollView(
