@@ -3,12 +3,10 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:querium/resources/firestore_methods.dart';
 import 'package:querium/utils/global_colors.dart';
 import 'package:querium/views/onboarding.dart';
 import 'package:querium/views/user/nav_bar.dart';
 
-import '../models/admin.dart';
 import 'admin/admin_navbar.dart';
 
 // ignore: camel_case_types
@@ -22,37 +20,40 @@ class splashView extends StatefulWidget {
 // ignore: camel_case_types
 class _splashViewState extends State<splashView> {
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-    final user = FirebaseAuth.instance.currentUser == null
-        ? null
-        : await FirebaseFirestore.instance
-            .collection('type')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .get();
-    Widget next = FirebaseAuth.instance.currentUser == null
-        ? const OnBoarding()
-        : user!.data()!['type'] == "user" ? const NavBar() : const AdminNavBar();
-    Timer(
-      const Duration(seconds: 3),
-      () => Navigator.pushReplacement(
+
+    Future.wait([
+      getUserData(),
+      Future.delayed(
+        const Duration(milliseconds: 3000),
+      ),
+    ]).then((snapshot) {
+      String user = (snapshot.first as String);
+      Widget next = user == "onBoard"
+          ? const OnBoarding()
+          : user == "user"
+              ? const NavBar()
+              : const AdminNavBar();
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => next,
         ),
-      ),
-    );
+      );
+    });
   }
 
-  // checkAdminOrUser(snapshot) async {
-  //   String uid = snapshot.data!.uid;
-  //   var doc =
-  //       await FirebaseFirestore.instance.collection('admin').doc(uid).get();
-  //   if (!doc.exists) {
-  //   } else {
-  //     return const NavBar();
-  //   }
-  // }
+  Future<String> getUserData() async {
+    if(FirebaseAuth.instance.currentUser == null) return "onBoard";
+    DocumentReference ref = FirebaseFirestore.instance
+        .collection('type')
+        .doc(FirebaseAuth.instance.currentUser!.uid);
+    DocumentSnapshot snap = await ref.get();
+    Map<String, dynamic> map = snap.data() as Map<String, dynamic>;
+
+    return map['type'];
+  }
 
   @override
   Widget build(BuildContext context) {

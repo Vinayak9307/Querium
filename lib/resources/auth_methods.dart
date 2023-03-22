@@ -59,6 +59,10 @@ class AuthMethods {
             .collection('users')
             .doc(cred.user!.uid)
             .set(user.getData());
+        await _firestore
+              .collection('type')
+              .doc(cred.user!.uid)
+              .set({'type':"user"});
       }
       res = "Sign Up Success";
     } catch (err) {
@@ -108,6 +112,11 @@ class AuthMethods {
               .collection('admin')
               .doc(cred.user!.uid)
               .set(admin.getData());
+
+          await _firestore
+              .collection('type')
+              .doc(cred.user!.uid)
+              .set({'type':"admin"});
         }
         res = "Sign Up Success";
       } else {
